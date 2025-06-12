@@ -363,7 +363,7 @@
     </div>
 
     <script>
-        // Convert RGB decimal values to hex color
+        // Convert RGB decimal values to hex color with brightness adjustment
         function rgbToHex(r, g, b) {
             const toHex = (val) => {
                 const hex = Math.round(val * 255).toString(16);
@@ -372,13 +372,34 @@
             return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
         }
         
+        // Ensure distinct colors for teams
+        function getDistinctTeamColor(teamName, originalColor) {
+            // Predefined distinct colors for teams
+            const distinctColors = {
+                'Team 1': '#3498db', // Blue
+                'Team 2': '#e74c3c', // Red
+                'Team 3': '#f39c12', // Orange
+                'Team 4': '#9b59b6', // Purple
+                'Team 5': '#2ecc71', // Green
+                'Team 6': '#e67e22', // Dark Orange
+                'Team 7': '#1abc9c', // Turquoise
+                'Team 8': '#34495e'  // Dark Blue
+            };
+            
+            // Return predefined color if available, otherwise use original
+            return distinctColors[teamName] || originalColor;
+        }
+        
         // Create team lookup from CloudQuest data
         function createTeamLookup(teams) {
             const lookup = {};
             teams.forEach(team => {
+                const originalColor = rgbToHex(team.flag.color_bg.r, team.flag.color_bg.g, team.flag.color_bg.b);
+                const distinctColor = getDistinctTeamColor(team.name, originalColor);
+                
                 lookup[team.id] = {
                     name: team.name,
-                    color: rgbToHex(team.flag.color_bg.r, team.flag.color_bg.g, team.flag.color_bg.b)
+                    color: distinctColor
                 };
             });
             return lookup;
