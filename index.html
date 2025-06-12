@@ -363,7 +363,22 @@
     </div>
 
     <script>
-        // Convert RGB decimal values to hex color with brightness adjustment
+        // Load update time from time.txt file
+        async function loadUpdateTime() {
+            try {
+                const response = await fetch('./time.txt?' + Date.now()); // Cache bust
+                if (response.ok) {
+                    const updateTime = await response.text();
+                    return updateTime.trim(); // Remove any whitespace/newlines
+                } else {
+                    console.warn('Could not load time.txt, using current time');
+                    return new Date().toLocaleString();
+                }
+            } catch (error) {
+                console.warn('Error loading time.txt:', error);
+                return new Date().toLocaleString();
+            }
+        }
         function rgbToHex(r, g, b) {
             const toHex = (val) => {
                 const hex = Math.round(val * 255).toString(16);
@@ -435,8 +450,8 @@
             
             container.innerHTML = html;
             
-            // Update the shared last updated time using update_time from JSON
-            const updateTime = data.group.update_time || new Date().toLocaleString();
+            // Load and update the timestamp from time.txt
+            const updateTime = await loadUpdateTime();
             document.getElementById('lastUpdated').textContent = updateTime;
         }
         
@@ -498,8 +513,8 @@
                     document.getElementById('competitionStatus').className = 
                         data.group.status === 'OPEN' ? 'status-open' : 'status-closed';
                     
-                    // Display data
-                    displayTeams(data);
+                    // Display data (displayTeams will also update the timestamp)
+                    await displayTeams(data);
                     displayPlayers(data);
                     
                     console.log('Leaderboard updated successfully');
@@ -517,6 +532,14 @@
                 
                 document.getElementById('competitionStatus').textContent = 'ERROR';
                 document.getElementById('competitionStatus').className = 'status-closed';
+                
+                // Still try to load update time even if data fails
+                try {
+                    const updateTime = await loadUpdateTime();
+                    document.getElementById('lastUpdated').textContent = updateTime;
+                } catch (timeError) {
+                    document.getElementById('lastUpdated').textContent = 'Error loading time';
+                }
             }
         }
         
