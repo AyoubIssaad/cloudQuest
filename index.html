@@ -420,7 +420,7 @@
             return lookup;
         }
         
-        function displayTeams(data) {
+        async function displayTeams(data) {
             const container = document.getElementById('teamLeaderboard');
             const teamLookup = createTeamLookup(data.group.teams);
             
@@ -455,7 +455,7 @@
             document.getElementById('lastUpdated').textContent = updateTime;
         }
         
-        function displayPlayers(data) {
+        async function displayPlayers(data) {
             const container = document.getElementById('playerLeaderboard');
             const teamLookup = createTeamLookup(data.group.teams);
             
@@ -494,7 +494,7 @@
             
             container.innerHTML = html;
             
-            // Update time is already set by displayTeams function
+            // Update time is loaded by displayTeams function
         }
         
         // Load data from leaderboard-data.json
@@ -513,9 +513,9 @@
                     document.getElementById('competitionStatus').className = 
                         data.group.status === 'OPEN' ? 'status-open' : 'status-closed';
                     
-                    // Display data (displayTeams will also update the timestamp)
+                    // Display data (both functions handle timestamp loading)
                     await displayTeams(data);
-                    displayPlayers(data);
+                    await displayPlayers(data);
                     
                     console.log('Leaderboard updated successfully');
                 } else {
