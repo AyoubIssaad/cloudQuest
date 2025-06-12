@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DES Cloud Quest - TV Leaderboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f1419 0%, #1a2332 50%, #0f1419 100%);
+            color: white;
+            overflow: hidden;
+            height: 100vh;
+            position: relative;
+        }
+        
+        /* Animated background particles */
+        .bg-animation {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 6s infinite ease-in-out;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.3; }
+            50% { transform: translateY(-20px) rotate(180deg); opacity: 0.8; }
+        }
+        
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            height: 100vh;
+            padding: 30px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .section {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 25px;
+            padding: 35px;
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            overflow-y: auto;
+        }
+        
+        .section::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .section::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+        
+        .section::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 35px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+            padding-bottom: 25px;
+        }
+        
+        .main-title {
+            font-size: 2.8em;
+            font-weight: 900;
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 3s ease-in-out infinite;
+        }
+        
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        .section-title {
+            font-size: 2.2em;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #ffffff;
+        }
+        
+        .subtitle {
+            font-size: 1.3em;
+            opacity: 0.8;
+            margin-bottom: 15px;
+            color: #e0e6ed;
+        }
+        
+        .last-updated {
+            font-size: 1.1em;
+            opacity: 0.7;
+            font-style: italic;
+            color: #a8b2c0;
+        }
+        
+        .rank-item {
+            display: flex;
+            align-items: center;
+            padding: 20px 25px;
+            margin-bottom: 18px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 18px;
+            border-left: 6px solid transparent;
+            transition: all 0.4s ease;
+            animation: slideIn 0.6s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .rank-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .rank-item:hover::before {
+            opacity: 1;
+        }
+        
+        .rank-item:nth-child(1) { 
+            border-left-color: #ffd700; 
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+        }
+        .rank-item:nth-child(2) { 
+            border-left-color: #c0c0c0; 
+            box-shadow: 0 0 15px rgba(192, 192, 192, 0.2);
+        }
+        .rank-item:nth-child(3) { 
+            border-left-color: #cd7f32; 
+            box-shadow: 0 0 15px rgba(205, 127, 50, 0.2);
+        }
+        .rank-item:nth-child(n+4) { 
+            border-left-color: #4a90e2; 
+        }
+        
+        .rank-number {
+            font-size: 2.2em;
+            font-weight: 900;
+            min-width: 70px;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .rank-number.gold { 
+            color: #ffd700; 
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+        .rank-number.silver { 
+            color: #c0c0c0; 
+            text-shadow: 0 0 8px rgba(192, 192, 192, 0.4);
+        }
+        .rank-number.bronze { 
+            color: #cd7f32; 
+            text-shadow: 0 0 8px rgba(205, 127, 50, 0.4);
+        }
+        
+        .team-flag {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            margin: 0 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 18px;
+            color: white;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+        
+        .player-info {
+            flex: 1;
+        }
+        
+        .player-name {
+            font-size: 1.6em;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #ffffff;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+        
+        .team-name {
+            font-size: 1.1em;
+            opacity: 0.85;
+            color: #b8c5d1;
+        }
+        
+        .score {
+            font-size: 2em;
+            font-weight: 900;
+            color: #ffd700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+            min-width: 80px;
+            text-align: right;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 60px;
+            font-size: 1.8em;
+            opacity: 0.7;
+            color: #a8b2c0;
+        }
+        
+        .error {
+            text-align: center;
+            padding: 60px;
+            color: #ff6b6b;
+            font-size: 1.4em;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+        
+        .rank-item:hover {
+            animation: pulse 0.6s ease-in-out;
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        /* Auto-refresh indicator */
+        .refresh-indicator {
+            position: fixed;
+            top: 25px;
+            right: 25px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 1em;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            z-index: 10;
+        }
+        
+        .refresh-dot {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background: #4CAF50;
+            border-radius: 50%;
+            margin-right: 10px;
+            animation: blink 2s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0.3; }
+        }
+
+        /* Competition info */
+        .competition-info {
+            position: fixed;
+            top: 25px;
+            left: 25px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 1em;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            z-index: 10;
+        }
+        
+        .status-open {
+            color: #4CAF50;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background animation -->
+    <div class="bg-animation" id="bgAnimation"></div>
+
+    <div class="competition-info">
+        <span id="competitionName">DES Cloud Quest</span> • 
+        <span class="status-open" id="competitionStatus">OPEN</span>
+    </div>
+
+    <div class="refresh-indicator">
+        <span class="refresh-dot"></span>
+        Auto-refresh: <span id="refreshTimer">30s</span>
+    </div>
+
+    <div class="container">
+        <div class="section">
+            <div class="header">
+                <h1 class="main-title">🏆 DES Cloud Quest</h1>
+                <h2 class="section-title">Team Rankings</h2>
+                <div class="subtitle">Battle for Cloud Supremacy</div>
+                <div class="last-updated">Last updated: <span id="teamLastUpdated">Loading...</span></div>
+            </div>
+            <div id="teamLeaderboard" class="loading">Loading team rankings...</div>
+        </div>
+        
+        <div class="section">
+            <div class="header">
+                <h2 class="section-title">👤 Top Players</h2>
+                <div class="subtitle">Individual Champions</div>
+                <div class="last-updated">Last updated: <span id="playerLastUpdated">Loading...</span></div>
+            </div>
+            <div id="playerLeaderboard" class="loading">Loading player rankings...</div>
+        </div>
+    </div>
+
+    <script>
+        // Convert RGB decimal values to hex color
+        function rgbToHex(r, g, b) {
+            const toHex = (val) => {
+                const hex = Math.round(val * 255).toString(16);
+                return hex.length === 1 ? '0' + hex : hex;
+            };
+            return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
+        }
+        
+        // Create team lookup from CloudQuest data
+        function createTeamLookup(teams) {
+            const lookup = {};
+            teams.forEach(team => {
+                lookup[team.id] = {
+                    name: team.name,
+                    color: rgbToHex(team.flag.color_bg.r, team.flag.color_bg.g, team.flag.color_bg.b)
+                };
+            });
+            return lookup;
+        }
+        
+        function displayTeams(data) {
+            const container = document.getElementById('teamLeaderboard');
+            const teamLookup = createTeamLookup(data.group.teams);
+            
+            if (!data.teams || data.teams.length === 0) {
+                container.innerHTML = '<div class="error">No team data available</div>';
+                return;
+            }
+            
+            const html = data.teams.map(team => {
+                const teamInfo = teamLookup[team.team_id];
+                const rankClass = team.position === 1 ? 'gold' : team.position === 2 ? 'silver' : team.position === 3 ? 'bronze' : '';
+                
+                return `
+                    <div class="rank-item">
+                        <div class="rank-number ${rankClass}">${team.position}</div>
+                        <div class="team-flag" style="background-color: ${teamInfo?.color || '#666'};">
+                            ${teamInfo?.name?.charAt(teamInfo.name.length - 1) || '?'}
+                        </div>
+                        <div class="player-info">
+                            <div class="player-name">${teamInfo?.name || 'Unknown Team'}</div>
+                            <div class="team-name">Team Score</div>
+                        </div>
+                        <div class="score">${team.reputation_points}</div>
+                    </div>
+                `;
+            }).join('');
+            
+            container.innerHTML = html;
+            document.getElementById('teamLastUpdated').textContent = new Date().toLocaleString();
+        }
+        
+        function displayPlayers(data) {
+            const container = document.getElementById('playerLeaderboard');
+            const teamLookup = createTeamLookup(data.group.teams);
+            
+            if (!data.players || data.players.length === 0) {
+                container.innerHTML = '<div class="error">No player data available</div>';
+                return;
+            }
+            
+            // Show top 15 players
+            const html = data.players.slice(0, 15).map(player => {
+                const teamInfo = teamLookup[player.team_id];
+                const rankClass = player.position === 1 ? 'gold' : player.position === 2 ? 'silver' : player.position === 3 ? 'bronze' : '';
+                
+                return `
+                    <div class="rank-item">
+                        <div class="rank-number ${rankClass}">${player.position}</div>
+                        ${teamInfo ? `
+                            <div class="team-flag" style="background-color: ${teamInfo.color};">
+                                ${teamInfo.name.charAt(teamInfo.name.length - 1)}
+                            </div>
+                        ` : `
+                            <div class="team-flag" style="background-color: #666;">
+                                ?
+                            </div>
+                        `}
+                        <div class="player-info">
+                            <div class="player-name">${player.avatar_name}</div>
+                            <div class="team-name">${teamInfo?.name || 'No Team'}</div>
+                        </div>
+                        <div class="score">${player.reputation_points}</div>
+                    </div>
+                `;
+            }).join('');
+            
+            container.innerHTML = html;
+            document.getElementById('playerLastUpdated').textContent = new Date().toLocaleString();
+        }
+        
+        // Load data from external JSON file
+        async function loadData() {
+            try {
+                const response = await fetch('./leaderboard-data.json?' + Date.now()); // Cache bust
+                if (response.ok) {
+                    const data = await response.json();
+                    console.log('Data loaded successfully');
+                    
+                    // Update competition info
+                    document.getElementById('competitionName').textContent = data.group.name;
+                    document.getElementById('competitionStatus').textContent = data.group.status;
+                    document.getElementById('competitionStatus').className = 
+                        data.group.status === 'OPEN' ? 'status-open' : 'status-closed';
+                    
+                    displayTeams(data);
+                    displayPlayers(data);
+                } else {
+                    console.error('Could not load leaderboard data');
+                    document.getElementById('teamLeaderboard').innerHTML = 
+                        '<div class="error">Failed to load team data</div>';
+                    document.getElementById('playerLeaderboard').innerHTML = 
+                        '<div class="error">Failed to load player data</div>';
+                }
+            } catch (error) {
+                console.error('Error loading data:', error);
+                document.getElementById('teamLeaderboard').innerHTML = 
+                    '<div class="error">Error loading team data</div>';
+                document.getElementById('playerLeaderboard').innerHTML = 
+                    '<div class="error">Error loading player data</div>';
+            }
+        }
+        
+        // Auto-refresh timer
+        let refreshCountdown = 30;
+        function updateRefreshTimer() {
+            document.getElementById('refreshTimer').textContent = refreshCountdown + 's';
+            refreshCountdown--;
+            
+            if (refreshCountdown < 0) {
+                refreshCountdown = 30;
+                loadData();
+            }
+        }
+        
+        // Create animated background particles
+        function createBackgroundAnimation() {
+            const bgAnimation = document.getElementById('bgAnimation');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                particle.style.animationDuration = (Math.random() * 3 + 4) + 's';
+                bgAnimation.appendChild(particle);
+            }
+        }
+        
+        // Initialize
+        createBackgroundAnimation();
+        loadData();
+        setInterval(updateRefreshTimer, 1000);
+        setInterval(loadData, 30000); // Refresh every 30 seconds
+    </script>
+</body>
+</html>
