@@ -1,0 +1,436 @@
+{
+    "group": {
+        "name": "DES Cloud Quest",
+        "description": "Are you ready to challenge yourself ? ",
+        "start_time": 1749560400,
+        "end_time": 1750165200,
+        "status": "OPEN",
+        "support_report": true,
+        "teams": [
+            {
+                "name": "Team 1",
+                "flag": {
+                    "image": "Vector-10",
+                    "color_bg": {
+                        "r": 0.5372549,
+                        "g": 0.8666667,
+                        "b": 0.917647064,
+                        "a": 1
+                    },
+                    "color_icon": {
+                        "r": 0.7529412,
+                        "g": 0.9372549,
+                        "b": 0.9647059,
+                        "a": 1
+                    }
+                },
+                "id": "e6b83a88-0fc0-4eff-a411-c6bd9a9b2a34"
+            },
+            {
+                "name": "Team 2",
+                "flag": {
+                    "image": "Vector-20",
+                    "color_bg": {
+                        "r": 0.9529412,
+                        "g": 0.7254902,
+                        "b": 0.274509817,
+                        "a": 1
+                    },
+                    "color_icon": {
+                        "r": 0.8862745,
+                        "g": 0.466666669,
+                        "b": 0.698039234,
+                        "a": 1
+                    }
+                },
+                "id": "a8f0c20f-1e1b-4788-ba21-23b1f2dd229f"
+            },
+            {
+                "name": "Team 3",
+                "flag": {
+                    "image": "Vector-28",
+                    "color_bg": {
+                        "r": 0.905882359,
+                        "g": 0.627451,
+                        "b": 0.360784322,
+                        "a": 1
+                    },
+                    "color_icon": {
+                        "r": 0.847058833,
+                        "g": 0.309803933,
+                        "b": 0.282352954,
+                        "a": 1
+                    }
+                },
+                "id": "27a0bf5d-410e-4839-af78-43ce988c61ad"
+            },
+            {
+                "name": "Team 4",
+                "flag": {
+                    "image": "Vector-15",
+                    "color_bg": {
+                        "r": 0.372549027,
+                        "g": 0.129411772,
+                        "b": 0.2,
+                        "a": 1
+                    },
+                    "color_icon": {
+                        "r": 0.7529412,
+                        "g": 0.9372549,
+                        "b": 0.9647059,
+                        "a": 1
+                    }
+                },
+                "id": "578871fe-ec34-4a98-b119-41379088ebcc"
+            },
+            {
+                "name": "Team 5",
+                "flag": {
+                    "image": "Vector-19",
+                    "color_bg": {
+                        "r": 0.5058824,
+                        "g": 0.58431375,
+                        "b": 0.274509817,
+                        "a": 1
+                    },
+                    "color_icon": {
+                        "r": 0.498039216,
+                        "g": 0.8,
+                        "b": 0.968627453,
+                        "a": 1
+                    }
+                },
+                "id": "840a3dfc-cd7c-43b1-aab9-1887d74dc056"
+            },
+            {
+                "name": "Team 6",
+                "flag": {
+                    "image": "Vector-29",
+                    "color_bg": {
+                        "r": 0.372549027,
+                        "g": 0.129411772,
+                        "b": 0.2,
+                        "a": 1
+                    },
+                    "color_icon": {
+                        "r": 1,
+                        "g": 1,
+                        "b": 1,
+                        "a": 1
+                    }
+                },
+                "id": "08433843-15a1-4b6e-891e-9be2e2334c28"
+            }
+        ],
+        "type": "EVENT",
+        "include_owner_on_leaderboard": true,
+        "owner_id": "f47c0058-81ff-4d8b-a255-1b9b46d32739",
+        "join_code": null,
+        "group_id": "4024e7b9-4e85-4c7f-a5e7-684b51e4ca30",
+        "player_team_id": "27a0bf5d-410e-4839-af78-43ce988c61ad"
+    },
+    "players": [
+        {
+            "position": 1,
+            "code_group_id": "4024e7b9-4e85-4c7f-a5e7-684b51e4ca30",
+            "player": "4aee8557-6b2f-4546-9ec9-878df0ba5559",
+            "game_id": "CLOUD_QUEST",
+            "init_reputation_points": 0,
+            "reputation_points": 235,
+            "avatar_name": "SILENTKILLER",
+            "team_id": "840a3dfc-cd7c-43b1-aab9-1887d74dc056",
+            "stats": null
+        },
+        {
+            "position": 2,
+            "code_group_id": "4024e7b9-4e85-4c7f-a5e7-684b51e4ca30",
+            "player": "b8a3629e-d08f-436d-8abc-8eaff19f5766",
+            "game_id": "CLOUD_QUEST",
+            "init_reputation_points": 0,
+            "reputation_points": 140,
+            "avatar_name": "blank_team5",
+            "team_id": "840a3dfc-cd7c-43b1-aab9-1887d74dc056",
+            "stats": null
+        },
+        {
+            "position": 3,
+            "code_group_id": "4024e7b9-4e85-4c7f-a5e7-684b51e4ca30",
+            "player": "13f13036-bb70-446d-9233-577ac56e93d2",
+            "game_id": "CLOUD_QUEST",
+            "init_reputation_points": 0,
+            "reputation_points": 53,
+            "avatar_name": "DESBIGBOY",
+            "team_id": "578871fe-ec34-4a98-b119-41379088ebcc",
+            "stats": null
+        },
+        {
+            "position": 4,
+            "code_group_id": "4024e7b9-4e85-4c7f-a5e7-684b51e4ca30",
+            "player": "b07c18e4-1420-4ed2-ad81-d9edad580611",
+            "game_id": "CLOUD_QUEST",
+            "init_reputation_points": 0,
+            "reputation_points": 52,
+            "avatar_name": "T_hacket",
+            "team_id": "578871fe-ec34-4a98-b119-41379088ebcc",
+            "stats": null
+        },
+        {
+            "position": 5,
+            "code_group_id": "4024e7b9-4e85-4c7f-a5e7-684b51e4ca30",
+            "player": "364b1eff-63fa-4191-ac7c-672ae26c2058",
+            "game_id": "CLOUD_QUEST",
+            "init_reputation_points": 0,
+            "reputation_points": 50,
+            "avatar_name": "oussama B",
+            "team_id": "08433843-15a1-4b6e-891e-9be2e2334c28",
+            "stats": null
+        },
+        {
+            "position": 6,
+            "code_group_id": "4024e7b9-4e85-4c7f-a5e7-684b51e4ca30",
+            "player": "970114c3-895d-42f0-8763-9c0d610a3437",
+            "game_id": "CLOUD_QUEST",
+            "init_reputation_points": 0,
+            "reputation_points": 50,
+            "avatar_name": "B44",
+            "team_id": "578871fe-ec34-4a98-b119-41379088ebcc",
+            "stats": null
+        },
+        {
+            "position": 7,
+            "code_group_id": "4024e7b9-4e85-4c7f-a5e7-684b51e4ca30",
+            "player": "b7ecd5cf-17d8-4b30-aab8-30a71f37aecb",
+            "game_id": "CLOUD_QUEST",
+            "init_reputation_points": 20,
+            "reputation_points": 43,
+            "avatar_name": "Med2",
+            "team_id": "08433843-15a1-4b6e-891e-9be2e2334c28",
+            "stats": null
+        },
+        {
+            "position": 8,
+            "code_group_id": "4024e7b9-4e85-4c7f-a5e7-684b51e4ca30",
+            "player": "c89edaa6-6a52-4b1e-ba37-c8aef1aa9d38",
+            "game_id": "CLOUD_QUEST",
+            "init_reputation_points": 0,
+            "reputation_points": 35,
+            "avatar_name": "Milk99",
+            "team_id": "08433843-15a1-4b6e-891e-9be2e2334c28",
+            "stats": null
+        },
+        {
+            "position": 9,
+            "code_group_id": "4024e7b9-4e85-4c7f-a5e7-684b51e4ca30",
+            "player": "01afb480-eefb-4f6c-83d4-990c863064f4",
+            "game_id": "CLOUD_QUEST",
+            "init_reputation_points": 0,
+            "reputation_points": 33,
+            "avatar_name": "IAMchaimaa",
+            "team_id": "578871fe-ec34-4a98-b119-41379088ebcc",
+            "stats": null
+        },
+        {
+            "position": 10,
+            "code_group_id": "4024e7b9-4e85-4c7f-a5e7-684b51e4ca30",
+            "player": "c544e2db-4ede-4bed-abd2-bf7f5ece2cb8",
+            "game_id": "CLOUD_QUEST",
+            "init_reputation_points": 0,
+            "reputation_points": 31,
+            "avatar_name": "LambdaShade",
+            "team_id": "e6b83a88-0fc0-4eff-a411-c6bd9a9b2a34",
+            "stats": null
+        },
+        {
+            "position": 11,
+            "code_group_id": "4024e7b9-4e85-4c7f-a5e7-684b51e4ca30",
+            "player": "448d71f5-059e-4fa5-89da-da6d24bb01a5",
+            "game_id": "CLOUD_QUEST",
+            "init_reputation_points": 0,
+            "reputation_points": 23,
+            "avatar_name": "ByteMeIfYouCan",
+            "team_id": "27a0bf5d-410e-4839-af78-43ce988c61ad",
+            "stats": null
+        },
+        {
+            "position": 12,
+            "code_group_id": "4024e7b9-4e85-4c7f-a5e7-684b51e4ca30",
+            "player": "50ea5369-4b45-4f72-af1f-4d7ff758b3ae",
+            "game_id": "CLOUD_QUEST",
+            "init_reputation_points": 0,
+            "reputation_points": 10,
+            "avatar_name": "Master Amine",
+            "team_id": "27a0bf5d-410e-4839-af78-43ce988c61ad",
+            "stats": null
+        },
+        {
+            "position": 13,
+            "code_group_id": "4024e7b9-4e85-4c7f-a5e7-684b51e4ca30",
+            "player": "81795716-94ed-42fc-b01f-9c3e729b3c20",
+            "game_id": "CLOUD_QUEST",
+            "init_reputation_points": 0,
+            "reputation_points": 10,
+            "avatar_name": "CloudJustsuMaster",
+            "team_id": "27a0bf5d-410e-4839-af78-43ce988c61ad",
+            "stats": null
+        },
+        {
+            "position": 14,
+            "code_group_id": "4024e7b9-4e85-4c7f-a5e7-684b51e4ca30",
+            "player": "1c47b86e-ab68-48db-beab-04814bbbbc53",
+            "game_id": "CLOUD_QUEST",
+            "init_reputation_points": 0,
+            "reputation_points": 10,
+            "avatar_name": "ybenz",
+            "team_id": "27a0bf5d-410e-4839-af78-43ce988c61ad",
+            "stats": null
+        },
+        {
+            "position": 15,
+            "code_group_id": "4024e7b9-4e85-4c7f-a5e7-684b51e4ca30",
+            "player": "6ae9e03e-7c47-4efa-ad39-47e2619edb13",
+            "game_id": "CLOUD_QUEST",
+            "init_reputation_points": 0,
+            "reputation_points": 10,
+            "avatar_name": "test123l",
+            "team_id": "578871fe-ec34-4a98-b119-41379088ebcc",
+            "stats": null
+        },
+        {
+            "position": 16,
+            "code_group_id": "4024e7b9-4e85-4c7f-a5e7-684b51e4ca30",
+            "player": "7fba89af-9883-4582-95f8-c8116d0797d7",
+            "game_id": "CLOUD_QUEST",
+            "init_reputation_points": 0,
+            "reputation_points": 10,
+            "avatar_name": "SoW",
+            "team_id": "e6b83a88-0fc0-4eff-a411-c6bd9a9b2a34",
+            "stats": null
+        },
+        {
+            "position": 17,
+            "code_group_id": "4024e7b9-4e85-4c7f-a5e7-684b51e4ca30",
+            "player": "3c2c5133-bca8-4d0d-a013-066ee38b23e3",
+            "game_id": "CLOUD_QUEST",
+            "init_reputation_points": 0,
+            "reputation_points": 10,
+            "avatar_name": "medslm",
+            "team_id": null,
+            "stats": null
+        },
+        {
+            "position": 18,
+            "code_group_id": "4024e7b9-4e85-4c7f-a5e7-684b51e4ca30",
+            "player": "5541cba4-6c61-4112-bd3b-b74d127cab99",
+            "game_id": "CLOUD_QUEST",
+            "init_reputation_points": 0,
+            "reputation_points": 10,
+            "avatar_name": "Assiya24",
+            "team_id": "27a0bf5d-410e-4839-af78-43ce988c61ad",
+            "stats": null
+        },
+        {
+            "position": 19,
+            "code_group_id": "4024e7b9-4e85-4c7f-a5e7-684b51e4ca30",
+            "player": "0e1e89c5-1845-4f81-a20a-fdacd2781cc3",
+            "game_id": "CLOUD_QUEST",
+            "init_reputation_points": 0,
+            "reputation_points": 0,
+            "avatar_name": "Gragas",
+            "team_id": null,
+            "stats": null
+        },
+        {
+            "position": 19,
+            "code_group_id": "4024e7b9-4e85-4c7f-a5e7-684b51e4ca30",
+            "player": "214a2f9f-46f3-4b41-a211-50a212241c9d",
+            "game_id": "CLOUD_QUEST",
+            "init_reputation_points": 0,
+            "reputation_points": 0,
+            "avatar_name": "lfassi",
+            "team_id": "840a3dfc-cd7c-43b1-aab9-1887d74dc056",
+            "stats": null
+        },
+        {
+            "position": 19,
+            "code_group_id": "4024e7b9-4e85-4c7f-a5e7-684b51e4ca30",
+            "player": "26a3ec47-ee35-4b2c-91cc-aa23b0f365c2",
+            "game_id": "CLOUD_QUEST",
+            "init_reputation_points": 0,
+            "reputation_points": 0,
+            "avatar_name": "PhoeniX",
+            "team_id": "e6b83a88-0fc0-4eff-a411-c6bd9a9b2a34",
+            "stats": null
+        },
+        {
+            "position": 19,
+            "code_group_id": "4024e7b9-4e85-4c7f-a5e7-684b51e4ca30",
+            "player": "33bee36d-4cfb-4c88-be19-942b6962082d",
+            "game_id": "CLOUD_QUEST",
+            "init_reputation_points": 0,
+            "reputation_points": 0,
+            "avatar_name": "AvAlae",
+            "team_id": "840a3dfc-cd7c-43b1-aab9-1887d74dc056",
+            "stats": null
+        },
+        {
+            "position": 19,
+            "code_group_id": "4024e7b9-4e85-4c7f-a5e7-684b51e4ca30",
+            "player": "78c9bbe6-acb7-4093-a47a-fa382a7ff993",
+            "game_id": "CLOUD_QUEST",
+            "init_reputation_points": 0,
+            "reputation_points": 0,
+            "avatar_name": "CloudXHunter",
+            "team_id": "e6b83a88-0fc0-4eff-a411-c6bd9a9b2a34",
+            "stats": null
+        },
+        {
+            "position": 24,
+            "code_group_id": "4024e7b9-4e85-4c7f-a5e7-684b51e4ca30",
+            "player": "f47c0058-81ff-4d8b-a255-1b9b46d32739",
+            "game_id": "CLOUD_QUEST",
+            "init_reputation_points": 213,
+            "reputation_points": 0,
+            "avatar_name": "Hania_sudo",
+            "team_id": null,
+            "stats": null
+        }
+    ],
+    "teams": [
+        {
+            "team_id": "840a3dfc-cd7c-43b1-aab9-1887d74dc056",
+            "position": 1,
+            "code_group_id": "4024e7b9-4e85-4c7f-a5e7-684b51e4ca30",
+            "reputation_points": 375
+        },
+        {
+            "team_id": "578871fe-ec34-4a98-b119-41379088ebcc",
+            "position": 2,
+            "code_group_id": "4024e7b9-4e85-4c7f-a5e7-684b51e4ca30",
+            "reputation_points": 198
+        },
+        {
+            "team_id": "08433843-15a1-4b6e-891e-9be2e2334c28",
+            "position": 3,
+            "code_group_id": "4024e7b9-4e85-4c7f-a5e7-684b51e4ca30",
+            "reputation_points": 128
+        },
+        {
+            "team_id": "27a0bf5d-410e-4839-af78-43ce988c61ad",
+            "position": 4,
+            "code_group_id": "4024e7b9-4e85-4c7f-a5e7-684b51e4ca30",
+            "reputation_points": 63
+        },
+        {
+            "team_id": "e6b83a88-0fc0-4eff-a411-c6bd9a9b2a34",
+            "position": 5,
+            "code_group_id": "4024e7b9-4e85-4c7f-a5e7-684b51e4ca30",
+            "reputation_points": 41
+        },
+        {
+            "team_id": "a8f0c20f-1e1b-4788-ba21-23b1f2dd229f",
+            "position": 6,
+            "code_group_id": "4024e7b9-4e85-4c7f-a5e7-684b51e4ca30",
+            "reputation_points": 0
+        }
+    ]
+}
