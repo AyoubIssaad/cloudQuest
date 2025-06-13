@@ -19,8 +19,16 @@ jobs:
         
     - name: Update timestamp
       run: |
-        # Set London timezone
-        TZ='Europe/London' echo "$(date '+%Y/%m/%d, %H:%M')" > time.txt
+        # Install tzdata to ensure proper timezone handling
+        sudo apt-get update && sudo apt-get install -y tzdata
+        
+        # Set London timezone with proper DST handling
+        export TZ='Europe/London'
+        echo "$(date '+%Y/%m/%d, %H:%M')" > time.txt
+        
+        # Debug: show what time we're using
+        echo "Generated timestamp: $(cat time.txt)"
+        echo "Current London time: $(date)"
         
     - name: Commit timestamp
       run: |
