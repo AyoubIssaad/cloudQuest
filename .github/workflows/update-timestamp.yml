@@ -19,8 +19,9 @@ jobs:
         
     - name: Update timestamp
       run: |
-        # Set Morocco timezone + 1 hour
-        TZ='GMT-2' echo "$(date '+%Y/%m/%d, %H:%M')" > time.txt
+        # Get Morocco time and add 1 hour manually
+        morocco_plus_one=$(TZ='Africa/Casablanca' date -d '+1 hour' '+%Y/%m/%d, %H:%M')
+        echo "$morocco_plus_one" > time.txt
         
     - name: Commit timestamp
       run: |
