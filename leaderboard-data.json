@@ -158,7 +158,7 @@
             "player": "13f13036-bb70-446d-9233-577ac56e93d2",
             "game_id": "CLOUD_QUEST",
             "init_reputation_points": 0,
-            "reputation_points": 319,
+            "reputation_points": 323,
             "avatar_name": "DESBIGBOY",
             "team_id": "578871fe-ec34-4a98-b119-41379088ebcc",
             "stats": null
@@ -169,7 +169,7 @@
             "player": "01afb480-eefb-4f6c-83d4-990c863064f4",
             "game_id": "CLOUD_QUEST",
             "init_reputation_points": 0,
-            "reputation_points": 234,
+            "reputation_points": 250,
             "avatar_name": "IAMchaimaa",
             "team_id": "578871fe-ec34-4a98-b119-41379088ebcc",
             "stats": null
@@ -188,23 +188,23 @@
         {
             "position": 6,
             "code_group_id": "4024e7b9-4e85-4c7f-a5e7-684b51e4ca30",
+            "player": "b7ecd5cf-17d8-4b30-aab8-30a71f37aecb",
+            "game_id": "CLOUD_QUEST",
+            "init_reputation_points": 20,
+            "reputation_points": 186,
+            "avatar_name": "Med2",
+            "team_id": "08433843-15a1-4b6e-891e-9be2e2334c28",
+            "stats": null
+        },
+        {
+            "position": 7,
+            "code_group_id": "4024e7b9-4e85-4c7f-a5e7-684b51e4ca30",
             "player": "970114c3-895d-42f0-8763-9c0d610a3437",
             "game_id": "CLOUD_QUEST",
             "init_reputation_points": 0,
             "reputation_points": 141,
             "avatar_name": "B44",
             "team_id": "578871fe-ec34-4a98-b119-41379088ebcc",
-            "stats": null
-        },
-        {
-            "position": 7,
-            "code_group_id": "4024e7b9-4e85-4c7f-a5e7-684b51e4ca30",
-            "player": "b7ecd5cf-17d8-4b30-aab8-30a71f37aecb",
-            "game_id": "CLOUD_QUEST",
-            "init_reputation_points": 20,
-            "reputation_points": 126,
-            "avatar_name": "Med2",
-            "team_id": "08433843-15a1-4b6e-891e-9be2e2334c28",
             "stats": null
         },
         {
@@ -221,23 +221,23 @@
         {
             "position": 9,
             "code_group_id": "4024e7b9-4e85-4c7f-a5e7-684b51e4ca30",
+            "player": "c89edaa6-6a52-4b1e-ba37-c8aef1aa9d38",
+            "game_id": "CLOUD_QUEST",
+            "init_reputation_points": 0,
+            "reputation_points": 90,
+            "avatar_name": "Milk99",
+            "team_id": "08433843-15a1-4b6e-891e-9be2e2334c28",
+            "stats": null
+        },
+        {
+            "position": 10,
+            "code_group_id": "4024e7b9-4e85-4c7f-a5e7-684b51e4ca30",
             "player": "b07c18e4-1420-4ed2-ad81-d9edad580611",
             "game_id": "CLOUD_QUEST",
             "init_reputation_points": 0,
             "reputation_points": 72,
             "avatar_name": "T_hacket",
             "team_id": "578871fe-ec34-4a98-b119-41379088ebcc",
-            "stats": null
-        },
-        {
-            "position": 10,
-            "code_group_id": "4024e7b9-4e85-4c7f-a5e7-684b51e4ca30",
-            "player": "c89edaa6-6a52-4b1e-ba37-c8aef1aa9d38",
-            "game_id": "CLOUD_QUEST",
-            "init_reputation_points": 0,
-            "reputation_points": 56,
-            "avatar_name": "Milk99",
-            "team_id": "08433843-15a1-4b6e-891e-9be2e2334c28",
             "stats": null
         },
         {
@@ -422,7 +422,7 @@
             "team_id": "578871fe-ec34-4a98-b119-41379088ebcc",
             "position": 1,
             "code_group_id": "4024e7b9-4e85-4c7f-a5e7-684b51e4ca30",
-            "reputation_points": 776
+            "reputation_points": 796
         },
         {
             "team_id": "840a3dfc-cd7c-43b1-aab9-1887d74dc056",
@@ -434,7 +434,7 @@
             "team_id": "08433843-15a1-4b6e-891e-9be2e2334c28",
             "position": 3,
             "code_group_id": "4024e7b9-4e85-4c7f-a5e7-684b51e4ca30",
-            "reputation_points": 524
+            "reputation_points": 618
         },
         {
             "team_id": "27a0bf5d-410e-4839-af78-43ce988c61ad",
