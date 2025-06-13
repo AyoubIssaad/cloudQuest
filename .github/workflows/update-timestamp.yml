@@ -4,25 +4,32 @@ on:
   push:
     branches: [ main ]
     paths: 
-      - 'leaderboard-data.json'  # Only trigger when JSON changes
+      - 'leaderboard-data.json'
 
 jobs:
   update-time:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         
     - name: Update timestamp
       run: |
-        # Set Morocco timezone and generate timestamp
-        TZ='Africa/Casablanca' echo "$(date '+%Y/%m/%d, %H:%M')" > time.txt
+        # Set Morocco timezone + 1 hour
+        TZ='GMT-2' echo "$(date '+%Y/%m/%d, %H:%M')" > time.txt
         
     - name: Commit timestamp
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git add time.txt
-        git diff --staged --quiet || git commit -m "Auto-update timestamp"
-        git push
+        if git diff --staged --quiet; then
+          echo "No changes to commit"
+        else
+          git commit -m "Auto-update timestamp"
+          git push
+        fi
