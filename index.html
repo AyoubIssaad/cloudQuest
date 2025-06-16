@@ -283,47 +283,87 @@
             bottom: 20px;
             left: 20px;
             right: 20px;
-            background: linear-gradient(135deg, #e74c3c, #c0392b);
-            padding: 25px;
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.15), rgba(155, 89, 182, 0.15));
+            border: 2px solid rgba(52, 152, 219, 0.6);
+            padding: 30px;
             border-radius: 20px;
-            font-size: 2.2em;
-            font-weight: 900;
-            color: white;
-            border: 3px solid rgba(255, 255, 255, 0.3);
-            backdrop-filter: blur(15px);
+            backdrop-filter: blur(20px);
             text-align: center;
-            box-shadow: 0 8px 25px rgba(231, 76, 60, 0.5);
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            box-shadow: 0 8px 32px rgba(52, 152, 219, 0.2);
         }
         
         .countdown-timer .countdown-label {
-            font-size: 0.4em;
+            font-size: 1em;
             font-weight: 600;
-            opacity: 0.9;
-            margin-bottom: 5px;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 15px;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
         }
         
-        .countdown-timer .countdown-time {
-            font-size: 1em;
+        .countdown-timer .countdown-display {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .countdown-unit {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .countdown-number {
+            font-size: 3.5em;
             font-weight: 900;
+            color: #ffffff;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+            line-height: 1;
+            min-width: 2ch;
+        }
+        
+        .countdown-unit-label {
+            font-size: 0.8em;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .countdown-separator {
+            font-size: 3em;
+            font-weight: 900;
+            color: rgba(255, 255, 255, 0.6);
+            animation: blink-separator 1s infinite;
         }
         
         .countdown-timer.ending-soon {
-            background: linear-gradient(135deg, #f39c12, #e67e22);
+            background: linear-gradient(135deg, rgba(243, 156, 18, 0.2), rgba(230, 126, 34, 0.2));
+            border: 2px solid rgba(243, 156, 18, 0.8);
+            box-shadow: 0 8px 32px rgba(243, 156, 18, 0.3);
+        }
+        
+        .countdown-timer.ending-soon .countdown-number {
             animation: pulse-warning 1.5s infinite;
-            box-shadow: 0 8px 25px rgba(243, 156, 18, 0.6);
         }
         
         .countdown-timer.ended {
-            background: linear-gradient(135deg, #95a5a6, #7f8c8d);
-            color: white;
+            background: linear-gradient(135deg, rgba(149, 165, 166, 0.2), rgba(127, 140, 141, 0.2));
+            border: 2px solid rgba(149, 165, 166, 0.6);
+            box-shadow: 0 8px 32px rgba(149, 165, 166, 0.2);
         }
         
         @keyframes pulse-warning {
             0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.02); }
+            50% { transform: scale(1.05); }
+        }
+        
+        @keyframes blink-separator {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0.3; }
         }
         
         .status-open {
@@ -393,7 +433,7 @@
         <div class="section">
             <div class="header">
                 <h2 class="section-title">Team Rankings</h2>
-                <div class="subtitle">Battle for Cloud Championship</div>
+                <div class="subtitle">Battle for Cloud Supremacy</div>
             </div>
             <div class="leaderboard-content">
                 <div id="teamLeaderboard" class="loading">Loading team rankings...</div>
@@ -402,7 +442,27 @@
             <!-- Big countdown timer at bottom of team section -->
             <div class="countdown-timer" id="countdownTimer">
                 <div class="countdown-label">Time to Finish Line</div>
-                <div class="countdown-time">Loading countdown...</div>
+                <div class="countdown-display">
+                    <div class="countdown-unit">
+                        <div class="countdown-number">00</div>
+                        <div class="countdown-unit-label">Days</div>
+                    </div>
+                    <div class="countdown-separator">:</div>
+                    <div class="countdown-unit">
+                        <div class="countdown-number">00</div>
+                        <div class="countdown-unit-label">Hours</div>
+                    </div>
+                    <div class="countdown-separator">:</div>
+                    <div class="countdown-unit">
+                        <div class="countdown-number">00</div>
+                        <div class="countdown-unit-label">Minutes</div>
+                    </div>
+                    <div class="countdown-separator">:</div>
+                    <div class="countdown-unit">
+                        <div class="countdown-number">00</div>
+                        <div class="countdown-unit-label">Seconds</div>
+                    </div>
+                </div>
             </div>
         </div>
         
@@ -427,10 +487,10 @@
             return new Date(unixTimestamp * 1000);
         }
         
-        // Format time remaining
+        // Format time remaining in DD:HH:MM:SS format
         function formatTimeRemaining(milliseconds) {
             if (milliseconds <= 0) {
-                return "Event Ended";
+                return { days: '00', hours: '00', minutes: '00', seconds: '00' };
             }
             
             const totalSeconds = Math.floor(milliseconds / 1000);
@@ -439,15 +499,12 @@
             const minutes = Math.floor((totalSeconds % 3600) / 60);
             const seconds = totalSeconds % 60;
             
-            if (days > 0) {
-                return `${days}d ${hours}h ${minutes}m remaining`;
-            } else if (hours > 0) {
-                return `${hours}h ${minutes}m ${seconds}s remaining`;
-            } else if (minutes > 0) {
-                return `${minutes}m ${seconds}s remaining`;
-            } else {
-                return `${seconds}s remaining`;
-            }
+            return {
+                days: days.toString().padStart(2, '0'),
+                hours: hours.toString().padStart(2, '0'),
+                minutes: minutes.toString().padStart(2, '0'),
+                seconds: seconds.toString().padStart(2, '0')
+            };
         }
         
         // Update countdown display
@@ -457,10 +514,34 @@
             const now = new Date().getTime();
             const timeRemaining = eventEndTime - now;
             const countdownElement = document.getElementById('countdownTimer');
-            const countdownTimeElement = countdownElement.querySelector('.countdown-time');
             
-            const timeText = formatTimeRemaining(timeRemaining);
-            countdownTimeElement.textContent = timeText;
+            const timeData = formatTimeRemaining(timeRemaining);
+            
+            // Update the countdown display
+            const countdownDisplay = countdownElement.querySelector('.countdown-display');
+            if (countdownDisplay) {
+                countdownDisplay.innerHTML = `
+                    <div class="countdown-unit">
+                        <div class="countdown-number">${timeData.days}</div>
+                        <div class="countdown-unit-label">Days</div>
+                    </div>
+                    <div class="countdown-separator">:</div>
+                    <div class="countdown-unit">
+                        <div class="countdown-number">${timeData.hours}</div>
+                        <div class="countdown-unit-label">Hours</div>
+                    </div>
+                    <div class="countdown-separator">:</div>
+                    <div class="countdown-unit">
+                        <div class="countdown-number">${timeData.minutes}</div>
+                        <div class="countdown-unit-label">Minutes</div>
+                    </div>
+                    <div class="countdown-separator">:</div>
+                    <div class="countdown-unit">
+                        <div class="countdown-number">${timeData.seconds}</div>
+                        <div class="countdown-unit-label">Seconds</div>
+                    </div>
+                `;
+            }
             
             // Change styling based on time remaining
             countdownElement.className = 'countdown-timer';
