@@ -136,7 +136,7 @@
             "player": "26a3ec47-ee35-4b2c-91cc-aa23b0f365c2",
             "game_id": "CLOUD_QUEST",
             "init_reputation_points": 0,
-            "reputation_points": 409,
+            "reputation_points": 484,
             "avatar_name": "PhoeniX",
             "team_id": "e6b83a88-0fc0-4eff-a411-c6bd9a9b2a34",
             "stats": null
@@ -147,7 +147,7 @@
             "player": "b8a3629e-d08f-436d-8abc-8eaff19f5766",
             "game_id": "CLOUD_QUEST",
             "init_reputation_points": 0,
-            "reputation_points": 392,
+            "reputation_points": 459,
             "avatar_name": "blank_team5",
             "team_id": "840a3dfc-cd7c-43b1-aab9-1887d74dc056",
             "stats": null
@@ -158,7 +158,7 @@
             "player": "4aee8557-6b2f-4546-9ec9-878df0ba5559",
             "game_id": "CLOUD_QUEST",
             "init_reputation_points": 0,
-            "reputation_points": 382,
+            "reputation_points": 405,
             "avatar_name": "SILENTKILLER",
             "team_id": "840a3dfc-cd7c-43b1-aab9-1887d74dc056",
             "stats": null
@@ -180,7 +180,7 @@
             "player": "01afb480-eefb-4f6c-83d4-990c863064f4",
             "game_id": "CLOUD_QUEST",
             "init_reputation_points": 0,
-            "reputation_points": 260,
+            "reputation_points": 262,
             "avatar_name": "IAMchaimaa",
             "team_id": "578871fe-ec34-4a98-b119-41379088ebcc",
             "stats": null
@@ -276,6 +276,17 @@
         {
             "position": 14,
             "code_group_id": "4024e7b9-4e85-4c7f-a5e7-684b51e4ca30",
+            "player": "7fba89af-9883-4582-95f8-c8116d0797d7",
+            "game_id": "CLOUD_QUEST",
+            "init_reputation_points": 0,
+            "reputation_points": 30,
+            "avatar_name": "SoW",
+            "team_id": "e6b83a88-0fc0-4eff-a411-c6bd9a9b2a34",
+            "stats": null
+        },
+        {
+            "position": 15,
+            "code_group_id": "4024e7b9-4e85-4c7f-a5e7-684b51e4ca30",
             "player": "78c9bbe6-acb7-4093-a47a-fa382a7ff993",
             "game_id": "CLOUD_QUEST",
             "init_reputation_points": 0,
@@ -285,7 +296,7 @@
             "stats": null
         },
         {
-            "position": 15,
+            "position": 16,
             "code_group_id": "4024e7b9-4e85-4c7f-a5e7-684b51e4ca30",
             "player": "50ea5369-4b45-4f72-af1f-4d7ff758b3ae",
             "game_id": "CLOUD_QUEST",
@@ -296,7 +307,7 @@
             "stats": null
         },
         {
-            "position": 16,
+            "position": 17,
             "code_group_id": "4024e7b9-4e85-4c7f-a5e7-684b51e4ca30",
             "player": "81795716-94ed-42fc-b01f-9c3e729b3c20",
             "game_id": "CLOUD_QUEST",
@@ -307,7 +318,7 @@
             "stats": null
         },
         {
-            "position": 17,
+            "position": 18,
             "code_group_id": "4024e7b9-4e85-4c7f-a5e7-684b51e4ca30",
             "player": "1c47b86e-ab68-48db-beab-04814bbbbc53",
             "game_id": "CLOUD_QUEST",
@@ -318,7 +329,7 @@
             "stats": null
         },
         {
-            "position": 18,
+            "position": 19,
             "code_group_id": "4024e7b9-4e85-4c7f-a5e7-684b51e4ca30",
             "player": "6ae9e03e-7c47-4efa-ad39-47e2619edb13",
             "game_id": "CLOUD_QUEST",
@@ -326,17 +337,6 @@
             "reputation_points": 10,
             "avatar_name": "test123l",
             "team_id": "578871fe-ec34-4a98-b119-41379088ebcc",
-            "stats": null
-        },
-        {
-            "position": 19,
-            "code_group_id": "4024e7b9-4e85-4c7f-a5e7-684b51e4ca30",
-            "player": "7fba89af-9883-4582-95f8-c8116d0797d7",
-            "game_id": "CLOUD_QUEST",
-            "init_reputation_points": 0,
-            "reputation_points": 10,
-            "avatar_name": "SoW",
-            "team_id": "e6b83a88-0fc0-4eff-a411-c6bd9a9b2a34",
             "stats": null
         },
         {
@@ -441,16 +441,16 @@
     ],
     "teams": [
         {
-            "team_id": "578871fe-ec34-4a98-b119-41379088ebcc",
+            "team_id": "840a3dfc-cd7c-43b1-aab9-1887d74dc056",
             "position": 1,
             "code_group_id": "4024e7b9-4e85-4c7f-a5e7-684b51e4ca30",
-            "reputation_points": 806
+            "reputation_points": 864
         },
         {
-            "team_id": "840a3dfc-cd7c-43b1-aab9-1887d74dc056",
+            "team_id": "578871fe-ec34-4a98-b119-41379088ebcc",
             "position": 2,
             "code_group_id": "4024e7b9-4e85-4c7f-a5e7-684b51e4ca30",
-            "reputation_points": 774
+            "reputation_points": 808
         },
         {
             "team_id": "08433843-15a1-4b6e-891e-9be2e2334c28",
@@ -462,7 +462,7 @@
             "team_id": "e6b83a88-0fc0-4eff-a411-c6bd9a9b2a34",
             "position": 4,
             "code_group_id": "4024e7b9-4e85-4c7f-a5e7-684b51e4ca30",
-            "reputation_points": 472
+            "reputation_points": 567
         },
         {
             "team_id": "27a0bf5d-410e-4839-af78-43ce988c61ad",
