@@ -144,22 +144,22 @@
         {
             "position": 2,
             "code_group_id": "4024e7b9-4e85-4c7f-a5e7-684b51e4ca30",
-            "player": "4aee8557-6b2f-4546-9ec9-878df0ba5559",
+            "player": "b8a3629e-d08f-436d-8abc-8eaff19f5766",
             "game_id": "CLOUD_QUEST",
             "init_reputation_points": 0,
-            "reputation_points": 381,
-            "avatar_name": "SILENTKILLER",
+            "reputation_points": 392,
+            "avatar_name": "blank_team5",
             "team_id": "840a3dfc-cd7c-43b1-aab9-1887d74dc056",
             "stats": null
         },
         {
             "position": 3,
             "code_group_id": "4024e7b9-4e85-4c7f-a5e7-684b51e4ca30",
-            "player": "b8a3629e-d08f-436d-8abc-8eaff19f5766",
+            "player": "4aee8557-6b2f-4546-9ec9-878df0ba5559",
             "game_id": "CLOUD_QUEST",
             "init_reputation_points": 0,
-            "reputation_points": 325,
-            "avatar_name": "blank_team5",
+            "reputation_points": 382,
+            "avatar_name": "SILENTKILLER",
             "team_id": "840a3dfc-cd7c-43b1-aab9-1887d74dc056",
             "stats": null
         },
@@ -177,23 +177,23 @@
         {
             "position": 5,
             "code_group_id": "4024e7b9-4e85-4c7f-a5e7-684b51e4ca30",
+            "player": "01afb480-eefb-4f6c-83d4-990c863064f4",
+            "game_id": "CLOUD_QUEST",
+            "init_reputation_points": 0,
+            "reputation_points": 260,
+            "avatar_name": "IAMchaimaa",
+            "team_id": "578871fe-ec34-4a98-b119-41379088ebcc",
+            "stats": null
+        },
+        {
+            "position": 6,
+            "code_group_id": "4024e7b9-4e85-4c7f-a5e7-684b51e4ca30",
             "player": "b7ecd5cf-17d8-4b30-aab8-30a71f37aecb",
             "game_id": "CLOUD_QUEST",
             "init_reputation_points": 20,
             "reputation_points": 258,
             "avatar_name": "Med2",
             "team_id": "08433843-15a1-4b6e-891e-9be2e2334c28",
-            "stats": null
-        },
-        {
-            "position": 6,
-            "code_group_id": "4024e7b9-4e85-4c7f-a5e7-684b51e4ca30",
-            "player": "01afb480-eefb-4f6c-83d4-990c863064f4",
-            "game_id": "CLOUD_QUEST",
-            "init_reputation_points": 0,
-            "reputation_points": 251,
-            "avatar_name": "IAMchaimaa",
-            "team_id": "578871fe-ec34-4a98-b119-41379088ebcc",
             "stats": null
         },
         {
@@ -257,7 +257,7 @@
             "player": "448d71f5-059e-4fa5-89da-da6d24bb01a5",
             "game_id": "CLOUD_QUEST",
             "init_reputation_points": 0,
-            "reputation_points": 53,
+            "reputation_points": 52,
             "avatar_name": "ByteMeIfYouCan",
             "team_id": "27a0bf5d-410e-4839-af78-43ce988c61ad",
             "stats": null
@@ -444,13 +444,13 @@
             "team_id": "578871fe-ec34-4a98-b119-41379088ebcc",
             "position": 1,
             "code_group_id": "4024e7b9-4e85-4c7f-a5e7-684b51e4ca30",
-            "reputation_points": 797
+            "reputation_points": 806
         },
         {
             "team_id": "840a3dfc-cd7c-43b1-aab9-1887d74dc056",
             "position": 2,
             "code_group_id": "4024e7b9-4e85-4c7f-a5e7-684b51e4ca30",
-            "reputation_points": 706
+            "reputation_points": 774
         },
         {
             "team_id": "08433843-15a1-4b6e-891e-9be2e2334c28",
