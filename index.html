@@ -65,6 +65,7 @@
             overflow: hidden;
             display: flex;
             flex-direction: column;
+            position: relative;
         }
         
         .header {
@@ -278,37 +279,51 @@
         }
         
         .countdown-timer {
-            position: fixed;
-            top: 15px;
-            right: 15px;
-            background: rgba(220, 53, 69, 0.9);
-            padding: 20px 30px;
-            border-radius: 25px;
-            font-size: 1.4em;
-            font-weight: bold;
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            padding: 25px;
+            border-radius: 20px;
+            font-size: 2.2em;
+            font-weight: 900;
             color: white;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            backdrop-filter: blur(10px);
-            z-index: 10;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(15px);
             text-align: center;
-            box-shadow: 0 6px 20px rgba(220, 53, 69, 0.4);
-            min-width: 250px;
+            box-shadow: 0 8px 25px rgba(231, 76, 60, 0.5);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+        
+        .countdown-timer .countdown-label {
+            font-size: 0.4em;
+            font-weight: 600;
+            opacity: 0.9;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .countdown-timer .countdown-time {
+            font-size: 1em;
+            font-weight: 900;
         }
         
         .countdown-timer.ending-soon {
-            background: rgba(255, 193, 7, 0.9);
-            color: #000;
-            animation: pulse-warning 1s infinite;
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            animation: pulse-warning 1.5s infinite;
+            box-shadow: 0 8px 25px rgba(243, 156, 18, 0.6);
         }
         
         .countdown-timer.ended {
-            background: rgba(108, 117, 125, 0.9);
+            background: linear-gradient(135deg, #95a5a6, #7f8c8d);
             color: white;
         }
         
         @keyframes pulse-warning {
             0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+            50% { transform: scale(1.02); }
         }
         
         .status-open {
@@ -363,10 +378,6 @@
         <span class="status-open" id="competitionStatus">LOADING</span>
     </div>
 
-    <div class="countdown-timer" id="countdownTimer">
-        Loading countdown...
-    </div>
-
     <div class="refresh-indicator">
         <span class="refresh-dot"></span>
         <span id="refreshTimer">30s</span>
@@ -382,10 +393,16 @@
         <div class="section">
             <div class="header">
                 <h2 class="section-title">Team Rankings</h2>
-                <div class="subtitle">Battle for Cloud Supremacy</div>
+                <div class="subtitle">Battle for Cloud Championship</div>
             </div>
             <div class="leaderboard-content">
                 <div id="teamLeaderboard" class="loading">Loading team rankings...</div>
+            </div>
+            
+            <!-- Big countdown timer at bottom of team section -->
+            <div class="countdown-timer" id="countdownTimer">
+                <div class="countdown-label">Time to Finish Line</div>
+                <div class="countdown-time">Loading countdown...</div>
             </div>
         </div>
         
@@ -440,21 +457,26 @@
             const now = new Date().getTime();
             const timeRemaining = eventEndTime - now;
             const countdownElement = document.getElementById('countdownTimer');
+            const countdownTimeElement = countdownElement.querySelector('.countdown-time');
             
             const timeText = formatTimeRemaining(timeRemaining);
-            countdownElement.textContent = timeText;
+            countdownTimeElement.textContent = timeText;
             
             // Change styling based on time remaining
             countdownElement.className = 'countdown-timer';
             
             if (timeRemaining <= 0) {
                 countdownElement.classList.add('ended');
+                countdownElement.querySelector('.countdown-label').textContent = 'Event Finished';
                 if (countdownInterval) {
                     clearInterval(countdownInterval);
                     countdownInterval = null;
                 }
             } else if (timeRemaining <= 3600000) { // Less than 1 hour
                 countdownElement.classList.add('ending-soon');
+                countdownElement.querySelector('.countdown-label').textContent = 'Final Sprint!';
+            } else {
+                countdownElement.querySelector('.countdown-label').textContent = 'Time to Finish Line';
             }
         }
         
