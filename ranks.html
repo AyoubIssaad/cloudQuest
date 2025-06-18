@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DES Cloud Quest - Victory Celebration</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #232f3e 0%, #ff9900 25%, #146eb4 75%, #232f3e 100%);
+            color: white;
+            overflow: hidden;
+            height: 100vh;
+            position: relative;
+        }
+        
+        /* Victory particles */
+        .victory-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+        
+        .star {
+            position: absolute;
+            background: #ffffff;
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            animation: star-twinkle 2s ease-in-out infinite;
+        }
+        
+        .star:nth-child(odd) { animation-delay: 1s; }
+        .star:nth-child(2n) { background: #ff9900; }
+        .star:nth-child(3n) { background: #146eb4; }
+        .star:nth-child(4n) { background: #fbbf24; }
+        
+        @keyframes star-twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+        
+        .container {
+            display: grid;
+            grid-template-rows: auto 1fr auto;
+            height: 100vh;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+            gap: 20px;
+        }
+        
+        /* Header Section */
+        .victory-header {
+            text-align: center;
+            background: rgba(35, 47, 62, 0.85);
+            border-radius: 30px;
+            padding: 35px;
+            backdrop-filter: blur(25px);
+            border: 3px solid rgba(255, 153, 0, 0.6);
+            box-shadow: 0 20px 40px rgba(255, 153, 0, 0.3);
+        }
+        
+        .victory-title {
+            font-size: 4.5em;
+            font-weight: 900;
+            background: linear-gradient(45deg, #ff9900, #fbbf24, #146eb4, #ff9900);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: rainbow-flow 3s ease-in-out infinite;
+            margin-bottom: 15px;
+            text-shadow: 0 0 30px rgba(255, 153, 0, 0.5);
+        }
+        
+        .victory-subtitle {
+            font-size: 1.6em;
+            color: rgba(255, 255, 255, 0.95);
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .tournament-completion {
+            font-size: 1.3em;
+            color: rgba(255, 255, 255, 0.85);
+            font-weight: 600;
+        }
+        
+        @keyframes rainbow-flow {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        /* Main Content */
+        .champions-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            height: 100%;
+        }
+        
+        .champion-card {
+            background: rgba(35, 47, 62, 0.8);
+            border-radius: 30px;
+            padding: 30px;
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(20, 110, 180, 0.6);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(20, 110, 180, 0.2);
+        }
+        
+        .champion-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 153, 0, 0.1), rgba(20, 110, 180, 0.1));
+            opacity: 0;
+            animation: card-glow 4s ease-in-out infinite;
+        }
+        
+        @keyframes card-glow {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+        
+        .champion-header {
+            text-align: center;
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .champion-type {
+            font-size: 2.8em;
+            font-weight: 900;
+            color: #ff9900;
+            margin-bottom: 10px;
+            text-shadow: 3px 3px 6px rgba(20, 110, 180, 0.6);
+        }
+        
+        .champion-subtitle {
+            font-size: 1.3em;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 700;
+        }
+        
+        /* Team Champion */
+        .team-champion {
+            position: relative;
+            z-index: 1;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .winning-team-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+        
+        .team-crown {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-right: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 2.5em;
+            color: white;
+            text-shadow: 2px 2px 6px rgba(0,0,0,0.8);
+            border: 4px solid rgba(255, 153, 0, 0.8);
+            box-shadow: 0 0 40px rgba(255, 153, 0, 0.5);
+            animation: crown-pulse 3s ease-in-out infinite;
+        }
+        
+        @keyframes crown-pulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 40px rgba(255, 153, 0, 0.5); }
+            50% { transform: scale(1.05); box-shadow: 0 0 60px rgba(255, 153, 0, 0.8); }
+        }
+        
+        .team-info h2 {
+            font-size: 3.2em;
+            font-weight: 900;
+            color: #ffffff;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
+            margin-bottom: 10px;
+        }
+        
+        .team-score {
+            font-size: 2.2em;
+            font-weight: 800;
+            color: #fbbf24;
+            text-shadow: 2px 2px 6px rgba(20, 110, 180, 0.6);
+        }
+        
+        /* Team Members Section */
+        .team-members-section {
+            flex: 1;
+            margin-top: 20px;
+        }
+        
+        .members-title {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.9);
+            text-align: center;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .team-members {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-height: 300px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+        
+        .team-members::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .team-members::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+        
+        .team-members::-webkit-scrollbar-thumb {
+            background: rgba(255, 153, 0, 0.6);
+            border-radius: 10px;
+        }
+        
+        .team-member {
+            background: rgba(35, 47, 62, 0.6);
+            border-radius: 12px;
+            padding: 15px;
+            border-left: 4px solid #146eb4;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        .team-member:hover {
+            background: rgba(35, 47, 62, 0.8);
+            transform: translateX(5px);
+        }
+        
+        .member-name {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #ffffff;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+        
+        .member-score {
+            font-size: 1.1em;
+            font-weight: 700;
+            color: #ff9900;
+            text-shadow: 1px 1px 3px rgba(20, 110, 180, 0.5);
+        }
+        
+        /* Individual Champions */
+        .individual-champions {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .podium {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            height: 100%;
+        }
+        
+        .podium-place {
+            display: flex;
+            align-items: center;
+            padding: 22px;
+            background: rgba(35, 47, 62, 0.6);
+            border-radius: 18px;
+            border-left: 6px solid;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .podium-place:nth-child(1) {
+            border-left-color: #ff9900;
+            flex: 1.3;
+        }
+        
+        .podium-place:nth-child(2) {
+            border-left-color: #fbbf24;
+            flex: 1.2;
+        }
+        
+        .podium-place:nth-child(3) {
+            border-left-color: #146eb4;
+            flex: 1.1;
+        }
+        
+        .podium-place::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, rgba(255, 153, 0, 0.15), transparent);
+            opacity: 0;
+            animation: podium-wave 3s ease-in-out infinite;
+            animation-delay: calc(var(--delay) * 0.7s);
+        }
+        
+        .podium-place:nth-child(1) { --delay: 0; }
+        .podium-place:nth-child(2) { --delay: 1; }
+        .podium-place:nth-child(3) { --delay: 2; }
+        
+        @keyframes podium-wave {
+            0%, 100% { opacity: 0; transform: translateX(-100%); }
+            50% { opacity: 1; transform: translateX(100%); }
+        }
+        
+        .medal {
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            margin-right: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 1.6em;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            border: 3px solid rgba(255, 255, 255, 0.4);
+            flex-shrink: 0;
+        }
+        
+        .place-number {
+            font-size: 2.2em;
+            font-weight: 900;
+            min-width: 45px;
+            text-align: center;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+        
+        .place-number.first { color: #ff9900; }
+        .place-number.second { color: #fbbf24; }
+        .place-number.third { color: #146eb4; }
+        
+        .player-details {
+            flex: 1;
+            min-width: 0;
+        }
+        
+        .player-name {
+            font-size: 1.9em;
+            font-weight: 800;
+            color: #ffffff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+            margin-bottom: 6px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .player-team {
+            font-size: 1.1em;
+            color: rgba(255, 255, 255, 0.85);
+            font-weight: 600;
+        }
+        
+        .player-score {
+            font-size: 2.1em;
+            font-weight: 900;
+            color: #fbbf24;
+            text-shadow: 2px 2px 4px rgba(20, 110, 180, 0.6);
+            text-align: right;
+            flex-shrink: 0;
+        }
+        
+        /* Footer */
+        .victory-footer {
+            text-align: center;
+            background: rgba(35, 47, 62, 0.7);
+            border-radius: 20px;
+            padding: 25px;
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(20, 110, 180, 0.4);
+        }
+        
+        .footer-message {
+            font-size: 1.4em;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: 12px;
+        }
+        
+        .completion-time {
+            font-size: 1.1em;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 600;
+        }
+        
+        /* Responsive */
+        @media (max-height: 800px) {
+            .victory-title { font-size: 3.5em; }
+            .champion-type { font-size: 2.2em; }
+            .team-info h2 { font-size: 2.8em; }
+            .team-score { font-size: 1.8em; }
+            .player-name { font-size: 1.6em; }
+            .player-score { font-size: 1.8em; }
+            .member-name { font-size: 1.1em; }
+            .team-members { max-height: 200px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Victory background -->
+    <div class="victory-bg" id="victoryBg"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="victory-header">
+            <h1 class="victory-title">VICTORY ACHIEVED!</h1>
+            <div class="victory-subtitle">Battle for Cloud Championship</div>
+            <div class="tournament-completion">Tournament completed: <span id="completionTime">Loading...</span></div>
+        </div>
+
+        <!-- Main Champions Section -->
+        <div class="champions-section">
+            <!-- Team Champion with Members -->
+            <div class="champion-card">
+                <div class="champion-header">
+                    <div class="champion-type">TEAM CHAMPIONS</div>
+                    <div class="champion-subtitle">Victorious Squadron</div>
+                </div>
+                
+                <div class="team-champion">
+                    <div class="winning-team-header">
+                        <div class="team-crown" id="teamCrown">1</div>
+                        <div class="team-info">
+                            <h2 id="winningTeamName">Loading...</h2>
+                            <div class="team-score" id="winningTeamScore">000</div>
+                        </div>
+                    </div>
+                    
+                    <div class="team-members-section">
+                        <div class="members-title">Team Members</div>
+                        <div class="team-members" id="teamMembers">
+                            <div class="team-member">
+                                <span class="member-name">Loading...</span>
+                                <span class="member-score">000</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Individual Champions -->
+            <div class="champion-card">
+                <div class="champion-header">
+                    <div class="champion-type">TOP PLAYERS</div>
+                    <div class="champion-subtitle">Individual Excellence</div>
+                </div>
+                
+                <div class="individual-champions">
+                    <div class="podium" id="podium">
+                        <div class="podium-place">
+                            <div class="place-number first">1</div>
+                            <div class="medal" id="medal1">1</div>
+                            <div class="player-details">
+                                <div class="player-name" id="player1Name">Loading...</div>
+                                <div class="player-team" id="player1Team">Team</div>
+                            </div>
+                            <div class="player-score" id="player1Score">000</div>
+                        </div>
+                        
+                        <div class="podium-place">
+                            <div class="place-number second">2</div>
+                            <div class="medal" id="medal2">2</div>
+                            <div class="player-details">
+                                <div class="player-name" id="player2Name">Loading...</div>
+                                <div class="player-team" id="player2Team">Team</div>
+                            </div>
+                            <div class="player-score" id="player2Score">000</div>
+                        </div>
+                        
+                        <div class="podium-place">
+                            <div class="place-number third">3</div>
+                            <div class="medal" id="medal3">3</div>
+                            <div class="player-details">
+                                <div class="player-name" id="player3Name">Loading...</div>
+                                <div class="player-team" id="player3Team">Team</div>
+                            </div>
+                            <div class="player-score" id="player3Score">000</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="victory-footer">
+            <div class="footer-message">Outstanding achievements in cloud technology mastery!</div>
+            <div class="completion-time">Final results: <span id="finalTime">Loading...</span></div>
+        </div>
+    </div>
+
+    <script>
+        // Convert RGB decimal values to hex color
+        function rgbToHex(r, g, b) {
+            const toHex = (val) => {
+                const hex = Math.round(val * 255).toString(16);
+                return hex.length === 1 ? '0' + hex : hex;
+            };
+            return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
+        }
+        
+        // Ensure distinct colors for teams
+        function getDistinctTeamColor(teamName, originalColor) {
+            const distinctColors = {
+                'Team 1': '#3498db',
+                'Team 2': '#e74c3c',
+                'Team 3': '#f39c12',
+                'Team 4': '#9b59b6',
+                'Team 5': '#2ecc71',
+                'Team 6': '#e67e22',
+                'Team 7': '#1abc9c',
+                'Team 8': '#34495e'
+            };
+            return distinctColors[teamName] || originalColor;
+        }
+        
+        // Create team lookup
+        function createTeamLookup(teams) {
+            const lookup = {};
+            teams.forEach(team => {
+                const originalColor = rgbToHex(team.flag.color_bg.r, team.flag.color_bg.g, team.flag.color_bg.b);
+                const distinctColor = getDistinctTeamColor(team.name, originalColor);
+                
+                lookup[team.id] = {
+                    name: team.name,
+                    color: distinctColor
+                };
+            });
+            return lookup;
+        }
+        
+        // Load completion time from time.txt
+        async function loadCompletionTime() {
+            try {
+                const response = await fetch('./time.txt?' + Date.now());
+                if (response.ok) {
+                    const completionTime = await response.text();
+                    return completionTime.trim();
+                } else {
+                    return new Date().toLocaleString();
+                }
+            } catch (error) {
+                return new Date().toLocaleString();
+            }
+        }
+        
+        // Display winning team and members
+        function displayWinningTeam(data) {
+            const teamLookup = createTeamLookup(data.group.teams);
+            
+            if (data.teams && data.teams.length > 0) {
+                const winningTeam = data.teams[0]; // First team in rankings
+                const teamInfo = teamLookup[winningTeam.team_id];
+                
+                document.getElementById('winningTeamName').textContent = teamInfo?.name || 'Unknown Team';
+                document.getElementById('winningTeamScore').textContent = winningTeam.reputation_points;
+                
+                // Set team color for crown
+                const crown = document.getElementById('teamCrown');
+                crown.style.backgroundColor = teamInfo?.color || '#ff9900';
+                crown.textContent = teamInfo?.name?.charAt(teamInfo.name.length - 1) || '1';
+                
+                // Display team members
+                displayTeamMembers(data.players, winningTeam.team_id, teamInfo);
+            }
+        }
+        
+        // Display team members
+        function displayTeamMembers(players, winningTeamId, teamInfo) {
+            const teamMembersContainer = document.getElementById('teamMembers');
+            
+            // Filter players by winning team ID
+            const teamMembers = players.filter(player => player.team_id === winningTeamId);
+            
+            if (teamMembers.length === 0) {
+                teamMembersContainer.innerHTML = `
+                    <div class="team-member">
+                        <span class="member-name">No team members found</span>
+                        <span class="member-score">-</span>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Sort team members by score (highest first)
+            teamMembers.sort((a, b) => b.reputation_points - a.reputation_points);
+            
+            const membersHTML = teamMembers.map(member => `
+                <div class="team-member">
+                    <span class="member-name">${member.avatar_name}</span>
+                    <span class="member-score">${member.reputation_points}</span>
+                </div>
+            `).join('');
+            
+            teamMembersContainer.innerHTML = membersHTML;
+        }
+        
+        // Display top 3 players
+        function displayTopPlayers(data) {
+            const teamLookup = createTeamLookup(data.group.teams);
+            
+            if (data.players && data.players.length >= 3) {
+                for (let i = 0; i < 3; i++) {
+                    const player = data.players[i];
+                    const teamInfo = teamLookup[player.team_id];
+                    
+                    document.getElementById(`player${i + 1}Name`).textContent = player.avatar_name;
+                    document.getElementById(`player${i + 1}Team`).textContent = teamInfo?.name || 'No Team';
+                    document.getElementById(`player${i + 1}Score`).textContent = player.reputation_points;
+                    
+                    // Set medal color
+                    const medal = document.getElementById(`medal${i + 1}`);
+                    medal.style.backgroundColor = teamInfo?.color || '#666';
+                    medal.textContent = (i + 1).toString();
+                }
+            }
+        }
+        
+        // Load and display championship data
+        async function loadChampionshipData() {
+            try {
+                const response = await fetch('./leaderboard-data.json?' + Date.now());
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    
+                    displayWinningTeam(data);
+                    displayTopPlayers(data);
+                    
+                    console.log('Championship data loaded successfully');
+                } else {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+            } catch (error) {
+                console.error('Error loading championship data:', error);
+                
+                // Show error state
+                document.getElementById('winningTeamName').textContent = 'Error loading data';
+                document.getElementById('player1Name').textContent = 'Error loading data';
+                document.getElementById('player2Name').textContent = 'Error loading data';
+                document.getElementById('player3Name').textContent = 'Error loading data';
+            }
+        }
+        
+        // Create twinkling stars
+        function createStars() {
+            const victoryBg = document.getElementById('victoryBg');
+            
+            for (let i = 0; i < 30; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                const size = Math.random() * 20 + 10;
+                star.style.width = size + 'px';
+                star.style.height = size + 'px';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 2 + 's';
+                star.style.animationDuration = (Math.random() * 2 + 1) + 's';
+                victoryBg.appendChild(star);
+            }
+        }
+        
+        // Initialize victory celebration
+        async function initializeVictory() {
+            console.log('Initializing Victory Celebration...');
+            
+            // Load completion time
+            const completionTime = await loadCompletionTime();
+            document.getElementById('completionTime').textContent = completionTime;
+            document.getElementById('finalTime').textContent = completionTime;
+            
+            // Load championship data
+            await loadChampionshipData();
+            
+            // Create star animation
+            createStars();
+            
+            console.log('Victory Celebration initialized!');
+        }
+        
+        // Start the celebration
+        document.addEventListener('DOMContentLoaded', initializeVictory);
+    </script>
+</body>
+</html>
