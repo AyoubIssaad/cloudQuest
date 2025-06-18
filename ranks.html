@@ -272,7 +272,7 @@
         }
         
         .member-name {
-            font-size: 0.95em;
+            font-size: 1.1em;
             font-weight: 600;
             color: #ffffff;
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
@@ -284,7 +284,7 @@
         }
         
         .member-real-name {
-            font-size: 0.75em;
+            font-size: 0.9em;
             font-weight: 500;
             color: rgba(255, 255, 255, 0.8);
             margin-bottom: 4px;
@@ -403,21 +403,10 @@
             font-weight: 800;
             color: #ffffff;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
-            margin-bottom: 3px;
+            margin-bottom: 6px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-        }
-        
-        .player-real-name {
-            font-size: 0.7em;
-            font-weight: 500;
-            color: rgba(255, 255, 255, 0.7);
-            margin-bottom: 3px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            font-style: italic;
         }
         
         .player-team {
@@ -466,7 +455,8 @@
             .team-score { font-size: 1.8em; }
             .player-name { font-size: 1.6em; }
             .player-score { font-size: 1.8em; }
-            .member-name { font-size: 0.85em; }
+            .member-name { font-size: 1em; }
+            .member-real-name { font-size: 0.8em; }
             .member-score { font-size: 0.8em; }
             .team-members { max-height: 200px; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
             .team-member { min-height: 55px; padding: 8px 10px; }
@@ -491,7 +481,7 @@
             <div class="champion-card">
                 <div class="champion-header">
                     <div class="champion-type">TEAM CHAMPIONS</div>
-                    <div class="champion-subtitle">Winner Team</div>
+                    <div class="champion-subtitle">Victorious Squadron</div>
                 </div>
                 
                 <div class="team-champion">
@@ -706,23 +696,11 @@
                     const teamInfo = teamLookup[player.team_id];
                     const realName = getRealName(player.avatar_name);
                     
-                    document.getElementById(`player${i + 1}Name`).textContent = player.avatar_name;
+                    // Display avatar name with real name in parentheses if available
+                    const displayName = realName ? `${player.avatar_name} (${realName})` : player.avatar_name;
+                    document.getElementById(`player${i + 1}Name`).textContent = displayName;
                     document.getElementById(`player${i + 1}Team`).textContent = teamInfo?.name || 'No Team';
                     document.getElementById(`player${i + 1}Score`).textContent = player.reputation_points;
-                    
-                    // Add real name if available
-                    const playerDetails = document.querySelector(`#player${i + 1}Name`).parentElement;
-                    const existingRealName = playerDetails.querySelector('.player-real-name');
-                    if (existingRealName) {
-                        existingRealName.remove();
-                    }
-                    
-                    if (realName) {
-                        const realNameElement = document.createElement('div');
-                        realNameElement.className = 'player-real-name';
-                        realNameElement.textContent = realName;
-                        playerDetails.insertBefore(realNameElement, document.getElementById(`player${i + 1}Team`));
-                    }
                     
                     // Set medal color
                     const medal = document.getElementById(`medal${i + 1}`);
