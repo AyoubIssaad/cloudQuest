@@ -147,7 +147,7 @@
             "player": "01afb480-eefb-4f6c-83d4-990c863064f4",
             "game_id": "CLOUD_QUEST",
             "init_reputation_points": 0,
-            "reputation_points": 765,
+            "reputation_points": 777,
             "avatar_name": "IAMchaimaa",
             "team_id": "578871fe-ec34-4a98-b119-41379088ebcc",
             "stats": null
@@ -180,7 +180,7 @@
             "player": "0217a09a-c67a-42b0-853c-ca8d439f1956",
             "game_id": "CLOUD_QUEST",
             "init_reputation_points": 50,
-            "reputation_points": 577,
+            "reputation_points": 589,
             "avatar_name": "hben",
             "team_id": "a8f0c20f-1e1b-4788-ba21-23b1f2dd229f",
             "stats": null
@@ -494,7 +494,7 @@
             "team_id": "578871fe-ec34-4a98-b119-41379088ebcc",
             "position": 2,
             "code_group_id": "4024e7b9-4e85-4c7f-a5e7-684b51e4ca30",
-            "reputation_points": 1509
+            "reputation_points": 1521
         },
         {
             "team_id": "e6b83a88-0fc0-4eff-a411-c6bd9a9b2a34",
@@ -512,7 +512,7 @@
             "team_id": "a8f0c20f-1e1b-4788-ba21-23b1f2dd229f",
             "position": 5,
             "code_group_id": "4024e7b9-4e85-4c7f-a5e7-684b51e4ca30",
-            "reputation_points": 780
+            "reputation_points": 792
         },
         {
             "team_id": "27a0bf5d-410e-4839-af78-43ce988c61ad",
