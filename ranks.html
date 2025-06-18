@@ -276,11 +276,23 @@
             font-weight: 600;
             color: #ffffff;
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+            margin-bottom: 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 100%;
+        }
+        
+        .member-real-name {
+            font-size: 0.75em;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.8);
             margin-bottom: 4px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
             width: 100%;
+            font-style: italic;
         }
         
         .member-score {
@@ -391,10 +403,21 @@
             font-weight: 800;
             color: #ffffff;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
-            margin-bottom: 6px;
+            margin-bottom: 3px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+        }
+        
+        .player-real-name {
+            font-size: 0.7em;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 3px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-style: italic;
         }
         
         .player-team {
@@ -458,7 +481,7 @@
         <!-- Header -->
         <div class="victory-header">
             <h1 class="victory-title">VICTORY ACHIEVED!</h1>
-            <div class="victory-subtitle">Battle for DES Cloud Quest</div>
+            <div class="victory-subtitle">Battle for Cloud Championship</div>
             <div class="tournament-completion">Tournament completed: <span id="completionTime">Loading...</span></div>
         </div>
 
@@ -468,7 +491,7 @@
             <div class="champion-card">
                 <div class="champion-header">
                     <div class="champion-type">TEAM CHAMPIONS</div>
-                    <div class="champion-subtitle">Winning Team</div>
+                    <div class="champion-subtitle">Victorious Squadron</div>
                 </div>
                 
                 <div class="team-champion">
@@ -543,7 +566,28 @@
     </div>
 
     <script>
-        // Convert RGB decimal values to hex color
+        // Global variable for names mapping
+        let namesMapping = {};
+        
+        // Load names mapping from names.json
+        async function loadNamesMapping() {
+            try {
+                const response = await fetch('./names.json?' + Date.now());
+                if (response.ok) {
+                    namesMapping = await response.json();
+                    console.log('Names mapping loaded successfully');
+                } else {
+                    console.warn('Could not load names.json, real names will not be displayed');
+                }
+            } catch (error) {
+                console.warn('Error loading names.json:', error);
+            }
+        }
+        
+        // Get real name for avatar
+        function getRealName(avatarName) {
+            return namesMapping[avatarName] || null;
+        }
         function rgbToHex(r, g, b) {
             const toHex = (val) => {
                 const hex = Math.round(val * 255).toString(16);
@@ -638,12 +682,16 @@
             // Sort team members by score (highest first)
             teamMembers.sort((a, b) => b.reputation_points - a.reputation_points);
             
-            const membersHTML = teamMembers.map(member => `
-                <div class="team-member">
-                    <span class="member-name">${member.avatar_name}</span>
-                    <span class="member-score">${member.reputation_points}</span>
-                </div>
-            `).join('');
+            const membersHTML = teamMembers.map(member => {
+                const realName = getRealName(member.avatar_name);
+                return `
+                    <div class="team-member">
+                        <span class="member-name">${member.avatar_name}</span>
+                        ${realName ? `<span class="member-real-name">${realName}</span>` : ''}
+                        <span class="member-score">${member.reputation_points}</span>
+                    </div>
+                `;
+            }).join('');
             
             teamMembersContainer.innerHTML = membersHTML;
         }
@@ -656,10 +704,25 @@
                 for (let i = 0; i < 3; i++) {
                     const player = data.players[i];
                     const teamInfo = teamLookup[player.team_id];
+                    const realName = getRealName(player.avatar_name);
                     
                     document.getElementById(`player${i + 1}Name`).textContent = player.avatar_name;
                     document.getElementById(`player${i + 1}Team`).textContent = teamInfo?.name || 'No Team';
                     document.getElementById(`player${i + 1}Score`).textContent = player.reputation_points;
+                    
+                    // Add real name if available
+                    const playerDetails = document.querySelector(`#player${i + 1}Name`).parentElement;
+                    const existingRealName = playerDetails.querySelector('.player-real-name');
+                    if (existingRealName) {
+                        existingRealName.remove();
+                    }
+                    
+                    if (realName) {
+                        const realNameElement = document.createElement('div');
+                        realNameElement.className = 'player-real-name';
+                        realNameElement.textContent = realName;
+                        playerDetails.insertBefore(realNameElement, document.getElementById(`player${i + 1}Team`));
+                    }
                     
                     // Set medal color
                     const medal = document.getElementById(`medal${i + 1}`);
@@ -716,6 +779,9 @@
         // Initialize victory celebration
         async function initializeVictory() {
             console.log('Initializing Victory Celebration...');
+            
+            // Load names mapping first
+            await loadNamesMapping();
             
             // Load completion time
             const completionTime = await loadCompletionTime();
