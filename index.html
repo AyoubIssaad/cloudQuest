@@ -13,7 +13,7 @@
 
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #232F3E 0%, #131A22 50%, #0F1419 100%);
             color: white;
             height: 100vh;
             overflow: hidden;
@@ -22,18 +22,18 @@
         }
 
         .header {
-            background: rgba(0, 0, 0, 0.3);
+            background: rgba(0, 0, 0, 0.4);
             padding: 20px;
             text-align: center;
             backdrop-filter: blur(10px);
-            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+            border-bottom: 2px solid rgba(255, 153, 0, 0.4);
         }
 
         .header h1 {
             font-size: 3rem;
             margin-bottom: 10px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-            background: linear-gradient(45deg, #FFD700, #FFA500);
+            background: linear-gradient(45deg, #FF9900, #FFAB00);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -54,21 +54,22 @@
         }
 
         .countdown-section {
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(35, 47, 62, 0.7);
             border-radius: 20px;
             padding: 30px;
             text-align: center;
             backdrop-filter: blur(10px);
-            border: 2px solid rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 153, 0, 0.4);
             display: flex;
             flex-direction: column;
             justify-content: center;
+            box-shadow: 0 8px 32px rgba(255, 153, 0, 0.2);
         }
 
         .current-event {
             font-size: 2rem;
             margin-bottom: 20px;
-            color: #FFD700;
+            color: #FF9900;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
 
@@ -76,12 +77,13 @@
             font-size: 1.5rem;
             margin-bottom: 30px;
             opacity: 0.9;
+            color: #FFCC80;
         }
 
         .countdown {
             font-size: 4rem;
             font-weight: bold;
-            color: #FFD700;
+            color: #FF9900;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
             margin-bottom: 20px;
             font-family: 'Courier New', monospace;
@@ -96,19 +98,20 @@
         }
 
         .schedule-section {
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(35, 47, 62, 0.7);
             border-radius: 20px;
             padding: 30px;
             backdrop-filter: blur(10px);
-            border: 2px solid rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 153, 0, 0.4);
             overflow-y: auto;
+            box-shadow: 0 8px 32px rgba(255, 153, 0, 0.2);
         }
 
         .schedule-title {
             font-size: 2rem;
             margin-bottom: 30px;
             text-align: center;
-            color: #FFD700;
+            color: #FF9900;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
 
@@ -123,27 +126,27 @@
         }
 
         .schedule-item.current {
-            background: rgba(255, 215, 0, 0.2);
-            border-left-color: #FFD700;
+            background: rgba(255, 153, 0, 0.25);
+            border-left-color: #FF9900;
             animation: pulse 2s infinite;
         }
 
         .schedule-item.completed {
-            background: rgba(0, 255, 0, 0.1);
-            border-left-color: #00ff00;
+            background: rgba(76, 175, 80, 0.15);
+            border-left-color: #4CAF50;
             opacity: 0.7;
         }
 
         .schedule-item.upcoming {
             background: rgba(255, 255, 255, 0.1);
-            border-left-color: rgba(255, 255, 255, 0.3);
+            border-left-color: rgba(255, 153, 0, 0.4);
         }
 
         .time {
             font-size: 1.2rem;
             font-weight: bold;
             min-width: 140px;
-            color: #FFD700;
+            color: #FF9900;
         }
 
         .event {
@@ -161,7 +164,7 @@
 
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #FFD700, #FFA500);
+            background: linear-gradient(90deg, #FF9900, #FFAB00);
             border-radius: 3px;
             transition: width 0.5s ease;
         }
@@ -175,22 +178,69 @@
             position: absolute;
             top: 20px;
             right: 20px;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(35, 47, 62, 0.8);
             padding: 10px 20px;
             border-radius: 20px;
             font-size: 0.9rem;
             backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 153, 0, 0.4);
         }
 
         .deloitte-badge {
             position: absolute;
             top: 20px;
             left: 20px;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(35, 47, 62, 0.8);
             padding: 10px 20px;
             border-radius: 20px;
             font-size: 0.9rem;
             backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 153, 0, 0.4);
+        }
+
+        .qr-section {
+            background: rgba(35, 47, 62, 0.7);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 153, 0, 0.4);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 8px 32px rgba(255, 153, 0, 0.2);
+        }
+
+        .qr-code {
+            width: 200px;
+            height: 200px;
+            background: white;
+            border-radius: 15px;
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .qr-title {
+            font-size: 1.8rem;
+            color: #FF9900;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .qr-subtitle {
+            font-size: 1.2rem;
+            color: #FFCC80;
+            margin-bottom: 20px;
+        }
+
+        .qr-instruction {
+            font-size: 1rem;
+            color: #FFE0B2;
+            margin-top: 10px;
         }
     </style>
 </head>
@@ -200,7 +250,7 @@
     
     <div class="header">
         <h1>EAID Hackathon 2025</h1>
-        <p>Building AI Solutions with AWS Services for Deloitte's EAID Practice</p>
+        <p>Building AI Solutions with AWS Services for Deloitte's EAID Practice | July 12th, 2025</p>
     </div>
 
     <div class="main-content">
@@ -237,7 +287,25 @@
             { time: '19:30', endTime: '20:00', event: 'Judging, Awards & Wrap-up' }
         ];
 
-        function parseTime(timeStr) {
+        function generateQRCode() {
+            // Simple QR code generator using a free API
+            const feedbackUrl = "https://forms.gle/your-feedback-form"; // Replace with actual form URL
+            const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(feedbackUrl)}`;
+            
+            return `<img src="${qrApiUrl}" alt="Feedback QR Code" style="width: 180px; height: 180px; border-radius: 10px;">`;
+        }
+
+        function showFeedbackSection() {
+            const countdownSection = document.querySelector('.countdown-section');
+            countdownSection.innerHTML = `
+                <div class="qr-title">Share Your Feedback!</div>
+                <div class="qr-subtitle">Help us improve future hackathons</div>
+                <div class="qr-code">
+                    ${generateQRCode()}
+                </div>
+                <div class="qr-instruction">Scan the QR code to access the feedback form</div>
+            `;
+        }
             const [hours, minutes] = timeStr.split(':').map(Number);
             const date = new Date();
             date.setHours(hours, minutes, 0, 0);
@@ -255,7 +323,45 @@
 
         function updateCountdown() {
             const now = new Date();
+            const hackathonDate = new Date(2025, 6, 12); // July 12th, 2025
+            
+            // Check if it's the hackathon day
+            const isHackathonDay = now.toDateString() === hackathonDate.toDateString();
+            
+            if (!isHackathonDay) {
+                // Show countdown to hackathon start
+                const hackathonStart = new Date(2025, 6, 12, 8, 0, 0); // July 12th, 8:00 AM
+                const timeDiff = hackathonStart - now;
+                
+                if (timeDiff > 0) {
+                    const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+                    
+                    document.getElementById('currentEvent').textContent = 'EAID Hackathon 2025';
+                    document.getElementById('nextEvent').textContent = 'Starting on July 12th, 2025';
+                    
+                    if (days > 0) {
+                        document.getElementById('countdown').textContent = `${days}d ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                    } else {
+                        document.getElementById('countdown').textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                    }
+                    
+                    // Update progress bar (show 0% before hackathon)
+                    document.getElementById('progressFill').style.width = '0%';
+                    return;
+                }
+            }
+            
+            // Hackathon day logic
             const currentTime = now.getHours() * 60 + now.getMinutes();
+            
+            // Check if it's time to show feedback (18:30 or later)
+            if (isHackathonDay && currentTime >= 18 * 60 + 30) {
+                showFeedbackSection();
+                return;
+            }
             
             let currentEventIndex = -1;
             let nextEventIndex = -1;
@@ -316,15 +422,19 @@
                 countdownEl.textContent = '🎉 DONE! 🎉';
             }
             
-            // Update progress bar
-            const totalDuration = parseTime('20:00') - parseTime('08:00');
-            const elapsed = now - parseTime('08:00');
-            const progress = Math.max(0, Math.min(100, (elapsed / totalDuration) * 100));
-            document.getElementById('progressFill').style.width = `${progress}%`;
+            // Update progress bar for hackathon day
+            if (isHackathonDay) {
+                const totalDuration = parseTime('20:00') - parseTime('08:00');
+                const elapsed = now - parseTime('08:00');
+                const progress = Math.max(0, Math.min(100, (elapsed / totalDuration) * 100));
+                document.getElementById('progressFill').style.width = `${progress}%`;
+            }
         }
 
         function updateSchedule() {
             const now = new Date();
+            const hackathonDate = new Date(2025, 6, 12); // July 12th, 2025
+            const isHackathonDay = now.toDateString() === hackathonDate.toDateString();
             const currentTime = now.getHours() * 60 + now.getMinutes();
             const container = document.getElementById('scheduleContainer');
             
@@ -339,11 +449,16 @@
                 const div = document.createElement('div');
                 div.className = 'schedule-item';
                 
-                if (currentTime >= eventStartMinutes && currentTime < eventEndMinutes) {
-                    div.classList.add('current');
-                } else if (currentTime >= eventEndMinutes) {
-                    div.classList.add('completed');
+                if (isHackathonDay) {
+                    if (currentTime >= eventStartMinutes && currentTime < eventEndMinutes) {
+                        div.classList.add('current');
+                    } else if (currentTime >= eventEndMinutes) {
+                        div.classList.add('completed');
+                    } else {
+                        div.classList.add('upcoming');
+                    }
                 } else {
+                    // Before hackathon day, all items are upcoming
                     div.classList.add('upcoming');
                 }
                 
