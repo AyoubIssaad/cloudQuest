@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EAID Hackathon 2025 - Winners</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #232F3E 0%, #131A22 50%, #0F1419 100%);
+            color: white;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #FF9900;
+            animation: fall linear infinite;
+        }
+
+        .confetti:nth-child(odd) {
+            background: #FFAB00;
+            width: 8px;
+            height: 8px;
+            animation-delay: -2s;
+        }
+
+        .confetti:nth-child(even) {
+            animation-delay: -4s;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .header {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border-bottom: 3px solid #FF9900;
+            box-shadow: 0 4px 20px rgba(255, 153, 0, 0.3);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            background: linear-gradient(45deg, #FF9900, #FFAB00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            font-size: 1rem;
+            opacity: 0.9;
+            color: #FFCC80;
+        }
+
+        .main-content {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            padding: 40px;
+            align-items: center;
+        }
+
+        .winner-section {
+            text-align: center;
+            background: rgba(35, 47, 62, 0.8);
+            border-radius: 30px;
+            padding: 40px;
+            backdrop-filter: blur(15px);
+            border: 3px solid #FF9900;
+            box-shadow: 0 12px 40px rgba(255, 153, 0, 0.4);
+            position: relative;
+        }
+
+        .winner-section::before {
+            content: '🏆';
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 3rem;
+            background: rgba(35, 47, 62, 0.9);
+            padding: 10px 20px;
+            border-radius: 50px;
+            border: 2px solid #FF9900;
+        }
+
+        .winner-title {
+            font-size: 3rem;
+            color: #FF9900;
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7), 0 0 20px rgba(255, 153, 0, 0.5);
+            }
+            to {
+                text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7), 0 0 30px rgba(255, 153, 0, 0.8);
+            }
+        }
+
+        .team-photo-container {
+            width: 100%;
+            max-width: 500px;
+            margin: 30px auto;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+            border: 4px solid #FF9900;
+            background: rgba(255, 255, 255, 0.1);
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .team-photo {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .photo-placeholder {
+            color: #FFCC80;
+            font-size: 1.2rem;
+            text-align: center;
+            padding: 40px;
+            opacity: 0.7;
+        }
+
+        .congratulations {
+            font-size: 1.8rem;
+            color: #FFCC80;
+            margin-top: 20px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .achievement-text {
+            font-size: 1.3rem;
+            color: #FFE0B2;
+            margin-top: 15px;
+            line-height: 1.5;
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .event-complete {
+            background: rgba(35, 47, 62, 0.8);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(76, 175, 80, 0.6);
+            box-shadow: 0 8px 32px rgba(76, 175, 80, 0.2);
+        }
+
+        .event-complete h2 {
+            font-size: 2rem;
+            color: #4CAF50;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .event-complete p {
+            font-size: 1.1rem;
+            color: #A5D6A7;
+            line-height: 1.6;
+        }
+
+        .feedback-section {
+            background: rgba(35, 47, 62, 0.8);
+            border-radius: 20px;
+            padding: 25px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 153, 0, 0.4);
+            box-shadow: 0 8px 32px rgba(255, 153, 0, 0.2);
+        }
+
+        .feedback-title {
+            font-size: 1.5rem;
+            color: #FF9900;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .qr-code-small {
+            width: 120px;
+            height: 120px;
+            background: white;
+            border-radius: 10px;
+            margin: 15px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .feedback-instruction {
+            font-size: 0.9rem;
+            color: #FFCC80;
+            margin-top: 10px;
+            line-height: 1.4;
+        }
+
+        .badges {
+            position: absolute;
+            top: 20px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            pointer-events: none;
+        }
+
+        .badge {
+            background: rgba(35, 47, 62, 0.9);
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 153, 0, 0.4);
+        }
+
+        .sparkle {
+            position: absolute;
+            color: #FFD700;
+            font-size: 2rem;
+            animation: sparkle 3s ease-in-out infinite;
+        }
+
+        .sparkle:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+        .sparkle:nth-child(2) { top: 20%; right: 15%; animation-delay: 1s; }
+        .sparkle:nth-child(3) { bottom: 30%; left: 20%; animation-delay: 2s; }
+        .sparkle:nth-child(4) { bottom: 15%; right: 10%; animation-delay: 0.5s; }
+
+        @keyframes sparkle {
+            0%, 100% { 
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            50% { 
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .footer-message {
+            text-align: center;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            font-size: 1.1rem;
+            color: #FFCC80;
+            border-top: 1px solid rgba(255, 153, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <!-- Confetti Animation -->
+    <div class="confetti" style="left: 10%; animation-duration: 3s;"></div>
+    <div class="confetti" style="left: 20%; animation-duration: 2.5s;"></div>
+    <div class="confetti" style="left: 30%; animation-duration: 3.5s;"></div>
+    <div class="confetti" style="left: 40%; animation-duration: 2s;"></div>
+    <div class="confetti" style="left: 50%; animation-duration: 4s;"></div>
+    <div class="confetti" style="left: 60%; animation-duration: 3s;"></div>
+    <div class="confetti" style="left: 70%; animation-duration: 2.5s;"></div>
+    <div class="confetti" style="left: 80%; animation-duration: 3.5s;"></div>
+    <div class="confetti" style="left: 90%; animation-duration: 2s;"></div>
+
+    <!-- Sparkles -->
+    <div class="sparkle">✨</div>
+    <div class="sparkle">⭐</div>
+    <div class="sparkle">✨</div>
+    <div class="sparkle">⭐</div>
+
+    <div class="badges">
+        <div class="badge">🏢 Deloitte EAID</div>
+        <div class="badge">☁️ AWS Solutions</div>
+    </div>
+    
+    <div class="header">
+        <h1>EAID Hackathon 2025 Champions!</h1>
+        <p>Building AI Solutions with AWS Services for Deloitte's EAID Practice | July 12th, 2025</p>
+    </div>
+
+    <div class="main-content">
+        <div class="winner-section">
+            <div class="winner-title">🏆 WINNERS! 🏆</div>
+            
+            <div class="team-photo-container" id="teamPhotoContainer">
+                <div class="photo-placeholder">
+                    Team photo will appear here<br>
+                    (winner.jpg)
+                </div>
+            </div>
+            
+            <div class="congratulations">
+                Congratulations to our Champions!
+            </div>
+            
+            <div class="achievement-text">
+                Outstanding innovation in AI solutions using AWS services.<br>
+                Your creativity and technical excellence have set a new standard!
+            </div>
+        </div>
+
+        <div class="sidebar">
+            <div class="event-complete">
+                <h2>🎉 Event Complete</h2>
+                <p>
+                    Thank you to all participants for an incredible day of innovation, collaboration, and breakthrough AI solutions!
+                </p>
+            </div>
+
+            <div class="feedback-section">
+                <div class="feedback-title">Share Your Experience</div>
+                <div class="qr-code-small" id="qrCodeSmall"></div>
+                <div class="feedback-instruction">
+                    Scan to provide feedback<br>and help us improve future hackathons
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-message">
+        🚀 Innovation • 🤝 Collaboration • 🏆 Excellence • Thank you for participating in EAID Hackathon 2025!
+    </div>
+
+    <script>
+        function generateQRCode() {
+            const feedbackUrl = "https://forms.gle/your-feedback-form"; // Replace with actual form URL
+            const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=${encodeURIComponent(feedbackUrl)}`;
+            
+            return `<img src="${qrApiUrl}" alt="Feedback QR Code" style="width: 100%; height: 100%; border-radius: 10px;">`;
+        }
+
+        function loadTeamPhoto() {
+            const container = document.getElementById('teamPhotoContainer');
+            
+            // Try to load the winner.jpg image
+            const img = new Image();
+            img.onload = function() {
+                container.innerHTML = `<img src="winner.jpg" alt="Winning Team" class="team-photo">`;
+            };
+            img.onerror = function() {
+                // Keep placeholder if image doesn't exist
+                container.innerHTML = `<div class="photo-placeholder">Team photo will appear here<br>(winner.jpg)</div>`;
+            };
+            img.src = 'winner.jpg';
+        }
+
+        function init() {
+            // Load QR code
+            document.getElementById('qrCodeSmall').innerHTML = generateQRCode();
+            
+            // Try to load team photo
+            loadTeamPhoto();
+        }
+
+        // Start the page
+        init();
+    </script>
+</body>
+</html>
