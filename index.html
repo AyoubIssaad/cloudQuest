@@ -3,809 +3,370 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DES Cloud Quest - TV Leaderboard</title>
+    <title>EAID Hackathon 2025</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0f1419 0%, #1a2332 50%, #0f1419 100%);
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            overflow: hidden;
             height: 100vh;
-            position: relative;
-        }
-        
-        /* Simplified background particles */
-        .bg-animation {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: 0;
-        }
-        
-        .particle {
-            position: absolute;
-            width: 3px;
-            height: 3px;
-            background: rgba(255, 255, 255, 0.08);
-            border-radius: 50%;
-            animation: float 8s infinite ease-in-out;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); opacity: 0.2; }
-            50% { transform: translateY(-15px); opacity: 0.6; }
-        }
-        
-        .container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            grid-template-rows: auto 1fr;
-            gap: 20px;
-            height: 100vh;
-            padding: 15px;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .section {
-            background: rgba(255, 255, 255, 0.06);
-            border-radius: 15px;
-            padding: 15px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            position: relative;
         }
-        
+
         .header {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
             text-align: center;
-            margin-bottom: 15px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-            padding-bottom: 10px;
-            flex-shrink: 0;
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
         }
-        
-        .shared-header {
-            text-align: center;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            flex-shrink: 0;
-            grid-column: 1 / -1;
-        }
-        
-        .main-title {
-            font-size: 1.8em;
-            font-weight: 800;
-            margin-bottom: 5px;
-            background: linear-gradient(45deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3);
-            background-size: 400% 400%;
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            background: linear-gradient(45deg, #FFD700, #FFA500);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            animation: gradientShift 4s ease-in-out infinite;
-        }
-        
-        @keyframes gradientShift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-        
-        .section-title {
-            font-size: 1.4em;
-            font-weight: 700;
-            margin-bottom: 5px;
-            color: #ffffff;
-        }
-        
-        .subtitle {
-            font-size: 0.9em;
-            opacity: 0.7;
-            margin-bottom: 5px;
-            color: #e0e6ed;
-        }
-        
-        .last-updated {
-            font-size: 0.8em;
-            opacity: 0.6;
-            color: #a8b2c0;
-        }
-        
-        .leaderboard-content {
-            flex: 1;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .rank-item {
-            display: flex;
-            align-items: center;
-            padding: 8px 12px;
-            margin-bottom: 6px;
-            background: rgba(255, 255, 255, 0.08);
-            border-radius: 8px;
-            border-left: 3px solid transparent;
-            animation: slideIn 0.4s ease-out;
-            flex-shrink: 0;
-        }
-        
-        .rank-item:nth-child(-n+3) { 
-            border-left-color: #ffd700; 
-        }
-        .rank-item:nth-child(n+4) { 
-            border-left-color: #4a90e2; 
-        }
-        
-        .rank-number {
-            font-size: 1.3em;
-            font-weight: 800;
-            min-width: 35px;
-            text-align: center;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-        }
-        
-        .rank-number.gold { color: #ffd700; }
-        .rank-number.silver { color: #c0c0c0; }
-        .rank-number.bronze { color: #cd7f32; }
-        
-        .team-flag {
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            margin: 0 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 800;
-            font-size: 12px;
-            color: white;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            flex-shrink: 0;
-        }
-        
-        .player-info {
-            flex: 1;
-            min-width: 0;
-        }
-        
-        .player-name {
-            font-size: 1.1em;
-            font-weight: 700;
-            margin-bottom: 2px;
-            color: #ffffff;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        
-        .team-name {
-            font-size: 0.8em;
-            opacity: 0.8;
-            color: #b8c5d1;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        
-        .score {
-            font-size: 1.3em;
-            font-weight: 800;
-            color: #ffd700;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
-            min-width: 50px;
-            text-align: right;
-            flex-shrink: 0;
-        }
-        
-        .loading {
-            text-align: center;
-            padding: 40px;
-            font-size: 1.2em;
-            opacity: 0.7;
-            color: #a8b2c0;
-        }
-        
-        .error {
-            text-align: center;
-            padding: 40px;
-            color: #ff6b6b;
-            font-size: 1em;
-        }
-        
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateX(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-        
-        /* Status indicators */
-        .refresh-indicator {
-            position: fixed;
-            top: 10px;
-            right: 15px;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 8px 15px;
-            border-radius: 15px;
-            font-size: 0.8em;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(8px);
-            z-index: 10;
-        }
-        
-        .refresh-dot {
-            display: inline-block;
-            width: 6px;
-            height: 6px;
-            background: #4CAF50;
-            border-radius: 50%;
-            margin-right: 6px;
-            animation: blink 2s infinite;
-        }
-        
-        @keyframes blink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0.3; }
         }
 
-        .competition-info {
-            position: fixed;
-            top: 10px;
-            left: 15px;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 8px 15px;
-            border-radius: 15px;
-            font-size: 0.8em;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(8px);
-            z-index: 10;
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
         }
-        
-        .countdown-timer {
-            position: absolute;
-            bottom: 20px;
-            left: 20px;
-            right: 20px;
-            background: linear-gradient(135deg, rgba(52, 152, 219, 0.15), rgba(155, 89, 182, 0.15));
-            border: 2px solid rgba(52, 152, 219, 0.6);
+
+        .main-content {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
             padding: 30px;
+            max-height: calc(100vh - 140px);
+        }
+
+        .countdown-section {
+            background: rgba(0, 0, 0, 0.4);
             border-radius: 20px;
-            backdrop-filter: blur(20px);
+            padding: 30px;
             text-align: center;
-            box-shadow: 0 8px 32px rgba(52, 152, 219, 0.2);
-        }
-        
-        .countdown-timer .countdown-label {
-            font-size: 1em;
-            font-weight: 600;
-            color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 15px;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-        }
-        
-        .countdown-timer .countdown-display {
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
             display: flex;
+            flex-direction: column;
             justify-content: center;
-            align-items: center;
-            gap: 20px;
+        }
+
+        .current-event {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #FFD700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .next-event {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .countdown {
+            font-size: 4rem;
+            font-weight: bold;
+            color: #FFD700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            margin-bottom: 20px;
             font-family: 'Courier New', monospace;
         }
-        
-        .countdown-unit {
+
+        .time-labels {
             display: flex;
-            flex-direction: column;
+            justify-content: center;
+            gap: 30px;
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        .schedule-section {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 20px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            overflow-y: auto;
+        }
+
+        .schedule-title {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            text-align: center;
+            color: #FFD700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .schedule-item {
+            display: flex;
             align-items: center;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
         }
-        
-        .countdown-number {
-            font-size: 3.5em;
-            font-weight: 900;
-            color: #ffffff;
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
-            line-height: 1;
-            min-width: 2ch;
+
+        .schedule-item.current {
+            background: rgba(255, 215, 0, 0.2);
+            border-left-color: #FFD700;
+            animation: pulse 2s infinite;
         }
-        
-        .countdown-unit-label {
-            font-size: 0.8em;
-            font-weight: 600;
-            color: rgba(255, 255, 255, 0.8);
-            margin-top: 5px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+
+        .schedule-item.completed {
+            background: rgba(0, 255, 0, 0.1);
+            border-left-color: #00ff00;
+            opacity: 0.7;
         }
-        
-        .countdown-separator {
-            font-size: 3em;
-            font-weight: 900;
-            color: rgba(255, 255, 255, 0.6);
-            animation: blink-separator 1s infinite;
+
+        .schedule-item.upcoming {
+            background: rgba(255, 255, 255, 0.1);
+            border-left-color: rgba(255, 255, 255, 0.3);
         }
-        
-        .countdown-timer.ending-soon {
-            background: linear-gradient(135deg, rgba(243, 156, 18, 0.2), rgba(230, 126, 34, 0.2));
-            border: 2px solid rgba(243, 156, 18, 0.8);
-            box-shadow: 0 8px 32px rgba(243, 156, 18, 0.3);
+
+        .time {
+            font-size: 1.2rem;
+            font-weight: bold;
+            min-width: 140px;
+            color: #FFD700;
         }
-        
-        .countdown-timer.ending-soon .countdown-number {
-            animation: pulse-warning 1.5s infinite;
+
+        .event {
+            font-size: 1.1rem;
+            flex: 1;
         }
-        
-        .countdown-timer.ended {
-            background: linear-gradient(135deg, rgba(149, 165, 166, 0.2), rgba(127, 140, 141, 0.2));
-            border: 2px solid rgba(149, 165, 166, 0.6);
-            box-shadow: 0 8px 32px rgba(149, 165, 166, 0.2);
+
+        .progress-bar {
+            height: 6px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
+            margin-top: 20px;
+            overflow: hidden;
         }
-        
-        @keyframes pulse-warning {
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #FFD700, #FFA500);
+            border-radius: 3px;
+            transition: width 0.5s ease;
+        }
+
+        @keyframes pulse {
             0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-        
-        @keyframes blink-separator {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0.3; }
-        }
-        
-        .status-open {
-            color: #4CAF50;
-            font-weight: bold;
-        }
-        
-        .status-closed {
-            color: #ff6b6b;
-            font-weight: bold;
+            50% { transform: scale(1.02); }
         }
 
-        /* Responsive adjustments for smaller screens */
-        @media (max-height: 800px) {
-            .container { padding: 10px; gap: 15px; }
-            .section { padding: 12px; }
-            .header { margin-bottom: 10px; padding-bottom: 8px; }
-            .shared-header { margin-bottom: 10px; padding-bottom: 8px; }
-            .main-title { font-size: 1.5em; }
-            .section-title { font-size: 1.2em; }
-            .rank-item { padding: 6px 10px; margin-bottom: 4px; }
-            .player-name { font-size: 1em; }
-            .rank-number { font-size: 1.1em; min-width: 30px; }
-            .team-flag { width: 24px; height: 24px; margin: 0 10px; font-size: 11px; }
-            .score { font-size: 1.1em; }
+        .aws-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            backdrop-filter: blur(10px);
         }
 
-        @media (max-height: 600px) {
-            .container { padding: 8px; gap: 12px; }
-            .section { padding: 10px; }
-            .header { margin-bottom: 8px; }
-            .shared-header { margin-bottom: 8px; }
-            .main-title { font-size: 1.3em; margin-bottom: 3px; }
-            .section-title { font-size: 1.1em; margin-bottom: 3px; }
-            .subtitle { font-size: 0.8em; margin-bottom: 3px; }
-            .last-updated { font-size: 0.7em; }
-            .rank-item { padding: 5px 8px; margin-bottom: 3px; }
-            .player-name { font-size: 0.9em; margin-bottom: 1px; }
-            .team-name { font-size: 0.7em; }
-            .rank-number { font-size: 1em; min-width: 28px; }
-            .team-flag { width: 22px; height: 22px; margin: 0 8px; font-size: 10px; }
-            .score { font-size: 1em; }
+        .deloitte-badge {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            backdrop-filter: blur(10px);
         }
     </style>
 </head>
 <body>
-    <!-- Background animation -->
-    <div class="bg-animation" id="bgAnimation"></div>
-
-    <div class="competition-info">
-        <span id="competitionName">DES Cloud Quest</span> • 
-        <span class="status-open" id="competitionStatus">LOADING</span>
+    <div class="deloitte-badge">🏢 Deloitte EAID</div>
+    <div class="aws-badge">☁️ AWS Solutions</div>
+    
+    <div class="header">
+        <h1>EAID Hackathon 2025</h1>
+        <p>Building AI Solutions with AWS Services for Deloitte's EAID Practice</p>
     </div>
 
-    <div class="refresh-indicator">
-        <span class="refresh-dot"></span>
-        <span id="refreshTimer">30s</span>
-    </div>
+    <div class="main-content">
+        <div class="countdown-section">
+            <div class="current-event" id="currentEvent">Welcome to EAID Hackathon!</div>
+            <div class="next-event" id="nextEvent">Next: Check-in & Breakfast</div>
+            <div class="countdown" id="countdown">00:00:00</div>
+            <div class="time-labels">
+                <span>Hours</span>
+                <span>Minutes</span>
+                <span>Seconds</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+        </div>
 
-    <div class="container">
-        <!-- Shared header across both columns -->
-        <div class="shared-header">
-            <h1 class="main-title">DES Cloud Quest Leaderboard</h1>
-            <div class="last-updated">Last updated: <span id="lastUpdated">Loading...</span></div>
-        </div>
-        
-        <div class="section">
-            <div class="header">
-                <h2 class="section-title">Team Rankings</h2>
-                <div class="subtitle">Battle for Cloud Championship</div>
-            </div>
-            <div class="leaderboard-content">
-                <div id="teamLeaderboard" class="loading">Loading team rankings...</div>
-            </div>
-            
-            <!-- Big countdown timer at bottom of team section -->
-            <div class="countdown-timer" id="countdownTimer">
-                <div class="countdown-label">Time to Finish Line</div>
-                <div class="countdown-display">
-                    <div class="countdown-unit">
-                        <div class="countdown-number">00</div>
-                        <div class="countdown-unit-label">Days</div>
-                    </div>
-                    <div class="countdown-separator">:</div>
-                    <div class="countdown-unit">
-                        <div class="countdown-number">00</div>
-                        <div class="countdown-unit-label">Hours</div>
-                    </div>
-                    <div class="countdown-separator">:</div>
-                    <div class="countdown-unit">
-                        <div class="countdown-number">00</div>
-                        <div class="countdown-unit-label">Minutes</div>
-                    </div>
-                    <div class="countdown-separator">:</div>
-                    <div class="countdown-unit">
-                        <div class="countdown-number">00</div>
-                        <div class="countdown-unit-label">Seconds</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="section">
-            <div class="header">
-                <h2 class="section-title">Top Players</h2>
-                <div class="subtitle">Individual Champions</div>
-            </div>
-            <div class="leaderboard-content">
-                <div id="playerLeaderboard" class="loading">Loading player rankings...</div>
-            </div>
+        <div class="schedule-section">
+            <div class="schedule-title">Today's Schedule</div>
+            <div id="scheduleContainer"></div>
         </div>
     </div>
 
     <script>
-        // Global variables for countdown
-        let eventEndTime = null;
-        let countdownInterval = null;
-        
-        // Convert Unix timestamp to Date object
-        function unixToDate(unixTimestamp) {
-            return new Date(unixTimestamp * 1000);
+        const schedule = [
+            { time: '08:00', endTime: '08:30', event: 'Check-in & Breakfast' },
+            { time: '08:30', endTime: '08:45', event: 'Kickoff & Rules Explanation' },
+            { time: '08:45', endTime: '09:00', event: 'Team Introductions & Project Announcements' },
+            { time: '09:00', endTime: '13:00', event: 'Hacking Session 1' },
+            { time: '13:00', endTime: '14:00', event: 'Lunch & Progress Updates' },
+            { time: '14:00', endTime: '18:00', event: 'Hacking Session 2' },
+            { time: '18:00', endTime: '18:30', event: 'Code Freeze & Final Submissions' },
+            { time: '18:30', endTime: '19:30', event: 'Presentations' },
+            { time: '19:30', endTime: '20:00', event: 'Judging, Awards & Wrap-up' }
+        ];
+
+        function parseTime(timeStr) {
+            const [hours, minutes] = timeStr.split(':').map(Number);
+            const date = new Date();
+            date.setHours(hours, minutes, 0, 0);
+            return date;
         }
-        
-        // Format time remaining in DD:HH:MM:SS format
-        function formatTimeRemaining(milliseconds) {
-            if (milliseconds <= 0) {
-                return { days: '00', hours: '00', minutes: '00', seconds: '00' };
-            }
-            
-            const totalSeconds = Math.floor(milliseconds / 1000);
-            const days = Math.floor(totalSeconds / (24 * 3600));
-            const hours = Math.floor((totalSeconds % (24 * 3600)) / 3600);
-            const minutes = Math.floor((totalSeconds % 3600) / 60);
-            const seconds = totalSeconds % 60;
-            
-            return {
-                days: days.toString().padStart(2, '0'),
-                hours: hours.toString().padStart(2, '0'),
-                minutes: minutes.toString().padStart(2, '0'),
-                seconds: seconds.toString().padStart(2, '0')
-            };
-        }
-        
-        // Update countdown display
-        function updateCountdown() {
-            if (!eventEndTime) return;
-            
-            const now = new Date().getTime();
-            const timeRemaining = eventEndTime - now;
-            const countdownElement = document.getElementById('countdownTimer');
-            
-            const timeData = formatTimeRemaining(timeRemaining);
-            
-            // Update the countdown display
-            const countdownDisplay = countdownElement.querySelector('.countdown-display');
-            if (countdownDisplay) {
-                countdownDisplay.innerHTML = `
-                    <div class="countdown-unit">
-                        <div class="countdown-number">${timeData.days}</div>
-                        <div class="countdown-unit-label">Days</div>
-                    </div>
-                    <div class="countdown-separator">:</div>
-                    <div class="countdown-unit">
-                        <div class="countdown-number">${timeData.hours}</div>
-                        <div class="countdown-unit-label">Hours</div>
-                    </div>
-                    <div class="countdown-separator">:</div>
-                    <div class="countdown-unit">
-                        <div class="countdown-number">${timeData.minutes}</div>
-                        <div class="countdown-unit-label">Minutes</div>
-                    </div>
-                    <div class="countdown-separator">:</div>
-                    <div class="countdown-unit">
-                        <div class="countdown-number">${timeData.seconds}</div>
-                        <div class="countdown-unit-label">Seconds</div>
-                    </div>
-                `;
-            }
-            
-            // Change styling based on time remaining
-            countdownElement.className = 'countdown-timer';
-            
-            if (timeRemaining <= 0) {
-                countdownElement.classList.add('ended');
-                countdownElement.querySelector('.countdown-label').textContent = 'Event Finished';
-                if (countdownInterval) {
-                    clearInterval(countdownInterval);
-                    countdownInterval = null;
-                }
-            } else if (timeRemaining <= 3600000) { // Less than 1 hour
-                countdownElement.classList.add('ending-soon');
-                countdownElement.querySelector('.countdown-label').textContent = 'Final Sprint!';
-            } else {
-                countdownElement.querySelector('.countdown-label').textContent = 'Time to Finish Line';
-            }
-        }
-        
-        // Start countdown timer
-        function startCountdown(endTimeUnix) {
-            eventEndTime = unixToDate(endTimeUnix).getTime();
-            
-            // Clear existing interval
-            if (countdownInterval) {
-                clearInterval(countdownInterval);
-            }
-            
-            // Update immediately
-            updateCountdown();
-            
-            // Update every second
-            countdownInterval = setInterval(updateCountdown, 1000);
-        }
-        async function loadUpdateTime() {
-            try {
-                const response = await fetch('./time.txt?' + Date.now()); // Cache bust
-                if (response.ok) {
-                    const updateTime = await response.text();
-                    return updateTime.trim(); // Remove any whitespace/newlines
-                } else {
-                    console.warn('Could not load time.txt, using current time');
-                    return new Date().toLocaleString();
-                }
-            } catch (error) {
-                console.warn('Error loading time.txt:', error);
-                return new Date().toLocaleString();
-            }
-        }
-        function rgbToHex(r, g, b) {
-            const toHex = (val) => {
-                const hex = Math.round(val * 255).toString(16);
-                return hex.length === 1 ? '0' + hex : hex;
-            };
-            return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
-        }
-        
-        // Ensure distinct colors for teams
-        function getDistinctTeamColor(teamName, originalColor) {
-            // Predefined distinct colors for teams
-            const distinctColors = {
-                'Team 1': '#3498db', // Blue
-                'Team 2': '#e74c3c', // Red
-                'Team 3': '#f39c12', // Orange
-                'Team 4': '#9b59b6', // Purple
-                'Team 5': '#2ecc71', // Green
-                'Team 6': '#e67e22', // Dark Orange
-                'Team 7': '#1abc9c', // Turquoise
-                'Team 8': '#34495e'  // Dark Blue
-            };
-            
-            // Return predefined color if available, otherwise use original
-            return distinctColors[teamName] || originalColor;
-        }
-        
-        // Create team lookup from CloudQuest data
-        function createTeamLookup(teams) {
-            const lookup = {};
-            teams.forEach(team => {
-                const originalColor = rgbToHex(team.flag.color_bg.r, team.flag.color_bg.g, team.flag.color_bg.b);
-                const distinctColor = getDistinctTeamColor(team.name, originalColor);
-                
-                lookup[team.id] = {
-                    name: team.name,
-                    color: distinctColor
-                };
+
+        function formatTime(date) {
+            return date.toLocaleTimeString('en-US', { 
+                hour: '2-digit', 
+                minute: '2-digit', 
+                second: '2-digit',
+                hour12: false 
             });
-            return lookup;
         }
-        
-        async function displayTeams(data) {
-            const container = document.getElementById('teamLeaderboard');
-            const teamLookup = createTeamLookup(data.group.teams);
+
+        function updateCountdown() {
+            const now = new Date();
+            const currentTime = now.getHours() * 60 + now.getMinutes();
             
-            if (!data.teams || data.teams.length === 0) {
-                container.innerHTML = '<div class="error">No team data available</div>';
-                return;
+            let currentEventIndex = -1;
+            let nextEventIndex = -1;
+            
+            // Find current and next events
+            for (let i = 0; i < schedule.length; i++) {
+                const eventStart = parseTime(schedule[i].time);
+                const eventEnd = parseTime(schedule[i].endTime);
+                const eventStartMinutes = eventStart.getHours() * 60 + eventStart.getMinutes();
+                const eventEndMinutes = eventEnd.getHours() * 60 + eventEnd.getMinutes();
+                
+                if (currentTime >= eventStartMinutes && currentTime < eventEndMinutes) {
+                    currentEventIndex = i;
+                    nextEventIndex = i + 1;
+                    break;
+                } else if (currentTime < eventStartMinutes) {
+                    nextEventIndex = i;
+                    break;
+                }
             }
             
-            const html = data.teams.map(teamRanking => {
-                const teamInfo = teamLookup[teamRanking.team_id];
-                const rankClass = teamRanking.position === 1 ? 'gold' : teamRanking.position === 2 ? 'silver' : teamRanking.position === 3 ? 'bronze' : '';
-                
-                return `
-                    <div class="rank-item">
-                        <div class="rank-number ${rankClass}">${teamRanking.position}</div>
-                        <div class="team-flag" style="background-color: ${teamInfo?.color || '#666'};">
-                            ${teamInfo?.name?.charAt(teamInfo.name.length - 1) || '?'}
-                        </div>
-                        <div class="player-info">
-                            <div class="player-name">${teamInfo?.name || 'Unknown Team'}</div>
-                            <div class="team-name">Team Score</div>
-                        </div>
-                        <div class="score">${teamRanking.reputation_points}</div>
-                    </div>
-                `;
-            }).join('');
+            const currentEventEl = document.getElementById('currentEvent');
+            const nextEventEl = document.getElementById('nextEvent');
+            const countdownEl = document.getElementById('countdown');
             
-            container.innerHTML = html;
-            
-            // Load and update the timestamp from time.txt
-            const updateTime = await loadUpdateTime();
-            document.getElementById('lastUpdated').textContent = updateTime;
-        }
-        
-        async function displayPlayers(data) {
-            const container = document.getElementById('playerLeaderboard');
-            const teamLookup = createTeamLookup(data.group.teams);
-            
-            if (!data.players || data.players.length === 0) {
-                container.innerHTML = '<div class="error">No player data available</div>';
-                return;
-            }
-            
-            // Calculate how many players we can show based on available space
-            const maxPlayers = Math.min(data.players.length, 25); // Show up to 25 players
-            
-            const html = data.players.slice(0, maxPlayers).map(player => {
-                const teamInfo = teamLookup[player.team_id];
-                const rankClass = player.position === 1 ? 'gold' : player.position === 2 ? 'silver' : player.position === 3 ? 'bronze' : '';
-                
-                return `
-                    <div class="rank-item">
-                        <div class="rank-number ${rankClass}">${player.position}</div>
-                        ${teamInfo ? `
-                            <div class="team-flag" style="background-color: ${teamInfo.color};">
-                                ${teamInfo.name.charAt(teamInfo.name.length - 1)}
-                            </div>
-                        ` : `
-                            <div class="team-flag" style="background-color: #666;">
-                                ?
-                            </div>
-                        `}
-                        <div class="player-info">
-                            <div class="player-name">${player.avatar_name}</div>
-                            <div class="team-name">${teamInfo?.name || 'No Team'}</div>
-                        </div>
-                        <div class="score">${player.reputation_points}</div>
-                    </div>
-                `;
-            }).join('');
-            
-            container.innerHTML = html;
-            
-            // Update time is loaded by displayTeams function
-        }
-        
-        // Load data from leaderboard-data.json
-        async function loadData() {
-            try {
-                console.log('Loading leaderboard data...');
-                const response = await fetch('./leaderboard-data.json?' + Date.now()); // Cache bust
-                
-                if (response.ok) {
-                    const data = await response.json();
-                    console.log('Data loaded successfully');
+            if (currentEventIndex !== -1) {
+                currentEventEl.textContent = `Now: ${schedule[currentEventIndex].event}`;
+                if (nextEventIndex < schedule.length) {
+                    nextEventEl.textContent = `Next: ${schedule[nextEventIndex].event}`;
+                    const nextEventTime = parseTime(schedule[nextEventIndex].time);
+                    const timeDiff = nextEventTime - now;
                     
-                    // Update competition info and start countdown
-                    document.getElementById('competitionName').textContent = data.group.name;
-                    document.getElementById('competitionStatus').textContent = data.group.status;
-                    document.getElementById('competitionStatus').className = 
-                        data.group.status === 'OPEN' ? 'status-open' : 'status-closed';
-                    
-                    // Start countdown timer
-                    if (data.group.end_time) {
-                        startCountdown(data.group.end_time);
+                    if (timeDiff > 0) {
+                        const hours = Math.floor(timeDiff / (1000 * 60 * 60));
+                        const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+                        const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+                        countdownEl.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
                     }
-                    
-                    // Display data (both functions handle timestamp loading)
-                    await displayTeams(data);
-                    await displayPlayers(data);
-                    
-                    console.log('Leaderboard updated successfully');
                 } else {
-                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                    nextEventEl.textContent = 'Hackathon Complete!';
+                    countdownEl.textContent = '🎉 DONE! 🎉';
                 }
-            } catch (error) {
-                console.error('Error loading leaderboard data:', error);
+            } else if (nextEventIndex !== -1) {
+                currentEventEl.textContent = 'Get Ready!';
+                nextEventEl.textContent = `Next: ${schedule[nextEventIndex].event}`;
+                const nextEventTime = parseTime(schedule[nextEventIndex].time);
+                const timeDiff = nextEventTime - now;
                 
-                // Show error messages
-                document.getElementById('teamLeaderboard').innerHTML = 
-                    '<div class="error">Failed to load team data</div>';
-                document.getElementById('playerLeaderboard').innerHTML = 
-                    '<div class="error">Failed to load player data</div>';
-                
-                document.getElementById('competitionStatus').textContent = 'ERROR';
-                document.getElementById('competitionStatus').className = 'status-closed';
-                
-                // Still try to load update time even if data fails
-                try {
-                    const updateTime = await loadUpdateTime();
-                    document.getElementById('lastUpdated').textContent = updateTime;
-                } catch (timeError) {
-                    document.getElementById('lastUpdated').textContent = 'Error loading time';
+                if (timeDiff > 0) {
+                    const hours = Math.floor(timeDiff / (1000 * 60 * 60));
+                    const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+                    countdownEl.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
                 }
+            } else {
+                currentEventEl.textContent = 'Hackathon Complete!';
+                nextEventEl.textContent = 'Thank you for participating!';
+                countdownEl.textContent = '🎉 DONE! 🎉';
             }
-        }
-        
-        // Auto-refresh timer
-        let refreshCountdown = 30;
-        function updateRefreshTimer() {
-            document.getElementById('refreshTimer').textContent = refreshCountdown + 's';
-            refreshCountdown--;
             
-            if (refreshCountdown < 0) {
-                refreshCountdown = 30;
-                loadData();
-            }
+            // Update progress bar
+            const totalDuration = parseTime('20:00') - parseTime('08:00');
+            const elapsed = now - parseTime('08:00');
+            const progress = Math.max(0, Math.min(100, (elapsed / totalDuration) * 100));
+            document.getElementById('progressFill').style.width = `${progress}%`;
         }
-        
-        // Create minimal background particles
-        function createBackgroundAnimation() {
-            const bgAnimation = document.getElementById('bgAnimation');
-            for (let i = 0; i < 30; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.top = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 8 + 's';
-                particle.style.animationDuration = (Math.random() * 4 + 6) + 's';
-                bgAnimation.appendChild(particle);
-            }
+
+        function updateSchedule() {
+            const now = new Date();
+            const currentTime = now.getHours() * 60 + now.getMinutes();
+            const container = document.getElementById('scheduleContainer');
+            
+            container.innerHTML = '';
+            
+            schedule.forEach((item, index) => {
+                const eventStart = parseTime(item.time);
+                const eventEnd = parseTime(item.endTime);
+                const eventStartMinutes = eventStart.getHours() * 60 + eventStart.getMinutes();
+                const eventEndMinutes = eventEnd.getHours() * 60 + eventEnd.getMinutes();
+                
+                const div = document.createElement('div');
+                div.className = 'schedule-item';
+                
+                if (currentTime >= eventStartMinutes && currentTime < eventEndMinutes) {
+                    div.classList.add('current');
+                } else if (currentTime >= eventEndMinutes) {
+                    div.classList.add('completed');
+                } else {
+                    div.classList.add('upcoming');
+                }
+                
+                div.innerHTML = `
+                    <div class="time">${item.time} - ${item.endTime}</div>
+                    <div class="event">${item.event}</div>
+                `;
+                
+                container.appendChild(div);
+            });
         }
-        
-        // Initialize everything
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('Initializing CloudQuest TV Leaderboard...');
-            createBackgroundAnimation();
-            loadData(); // Initial load
-            
-            // Set up auto-refresh
-            setInterval(updateRefreshTimer, 1000);        // Update countdown every second
-            setInterval(loadData, 30000);                 // Refresh data every 30 seconds
-            
-            console.log('Auto-refresh enabled: 30 seconds');
-        });
-        
-        // Handle visibility change (pause when tab not visible)
-        document.addEventListener('visibilitychange', function() {
-            if (!document.hidden) {
-                console.log('Tab visible again, reloading data...');
-                loadData();
-            }
-        });
+
+        function init() {
+            updateCountdown();
+            updateSchedule();
+            setInterval(() => {
+                updateCountdown();
+                updateSchedule();
+            }, 1000);
+        }
+
+        // Start the dashboard
+        init();
     </script>
 </body>
 </html>
