@@ -269,7 +269,7 @@
         </div>
 
         <div class="schedule-section">
-            <div class="schedule-title">Today's Schedule</div>
+            <div class="schedule-title">Event Schedule</div>
             <div id="scheduleContainer"></div>
         </div>
     </div>
@@ -326,7 +326,9 @@
             const hackathonDate = new Date(2025, 6, 12); // July 12th, 2025
             
             // Check if it's the hackathon day
-            const isHackathonDay = now.toDateString() === hackathonDate.toDateString();
+            const isHackathonDay = now.getFullYear() === 2025 && 
+                                   now.getMonth() === 6 && 
+                                   now.getDate() === 12;
             
             if (!isHackathonDay) {
                 // Show countdown to hackathon start
@@ -340,7 +342,7 @@
                     const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
                     
                     document.getElementById('currentEvent').textContent = 'EAID Hackathon 2025';
-                    document.getElementById('nextEvent').textContent = 'Starting on July 12th, 2025';
+                    document.getElementById('nextEvent').textContent = 'Starting Tomorrow at 8:00 AM';
                     
                     if (days > 0) {
                         document.getElementById('countdown').textContent = `${days}d ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
@@ -350,6 +352,13 @@
                     
                     // Update progress bar (show 0% before hackathon)
                     document.getElementById('progressFill').style.width = '0%';
+                    return;
+                } else {
+                    // If past start time but not hackathon day, show "Event has ended"
+                    document.getElementById('currentEvent').textContent = 'Event Complete';
+                    document.getElementById('nextEvent').textContent = 'Thank you for participating!';
+                    document.getElementById('countdown').textContent = '🎉 DONE! 🎉';
+                    document.getElementById('progressFill').style.width = '100%';
                     return;
                 }
             }
@@ -433,8 +442,9 @@
 
         function updateSchedule() {
             const now = new Date();
-            const hackathonDate = new Date(2025, 6, 12); // July 12th, 2025
-            const isHackathonDay = now.toDateString() === hackathonDate.toDateString();
+            const isHackathonDay = now.getFullYear() === 2025 && 
+                                   now.getMonth() === 6 && 
+                                   now.getDate() === 12;
             const currentTime = now.getHours() * 60 + now.getMinutes();
             const container = document.getElementById('scheduleContainer');
             
