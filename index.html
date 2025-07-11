@@ -254,9 +254,9 @@
     </div>
 
     <div class="main-content">
-        <div class="countdown-section">
-            <div class="current-event" id="currentEvent">Welcome to EAID Hackathon!</div>
-            <div class="next-event" id="nextEvent">Next: Check-in & Breakfast</div>
+        <div class="countdown-section" id="countdownSection">
+            <div class="current-event" id="currentEvent">EAID Hackathon 2025</div>
+            <div class="next-event" id="nextEvent">Starting Tomorrow at 8:00 AM</div>
             <div class="countdown" id="countdown">00:00:00</div>
             <div class="time-labels">
                 <span>Hours</span>
@@ -288,7 +288,6 @@
         ];
 
         function generateQRCode() {
-            // Simple QR code generator using a free API
             const feedbackUrl = "https://forms.gle/your-feedback-form"; // Replace with actual form URL
             const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(feedbackUrl)}`;
             
@@ -296,7 +295,7 @@
         }
 
         function showFeedbackSection() {
-            const countdownSection = document.querySelector('.countdown-section');
+            const countdownSection = document.getElementById('countdownSection');
             countdownSection.innerHTML = `
                 <div class="qr-title">Share Your Feedback!</div>
                 <div class="qr-subtitle">Help us improve future hackathons</div>
@@ -306,34 +305,23 @@
                 <div class="qr-instruction">Scan the QR code to access the feedback form</div>
             `;
         }
-            const [hours, minutes] = timeStr.split(':').map(Number);
-            const date = new Date();
-            date.setHours(hours, minutes, 0, 0);
-            return date;
-        }
 
-        function formatTime(date) {
-            return date.toLocaleTimeString('en-US', { 
-                hour: '2-digit', 
-                minute: '2-digit', 
-                second: '2-digit',
-                hour12: false 
-            });
+        function createHackathonDate(timeStr) {
+            const [hours, minutes] = timeStr.split(':').map(Number);
+            return new Date(2025, 6, 12, hours, minutes, 0, 0); // July 12th, 2025
         }
 
         function updateCountdown() {
             const now = new Date();
-            
-            // Create hackathon start time: July 12th, 2025 at 8:00 AM
-            const hackathonStart = new Date(2025, 6, 12, 8, 0, 0); // July 12th, 8:00 AM
+            const hackathonStart = createHackathonDate('08:00');
             const timeDiff = hackathonStart - now;
             
             // Check if it's currently July 12th, 2025
-            const isHackathonDay = now.getFullYear() === 2025 && 
-                                   now.getMonth() === 6 && 
-                                   now.getDate() === 12;
-            
-            // If hackathon hasn't started yet (before July 12th 8:00 AM)
+            const isToday = now.getFullYear() === 2025 && 
+                           now.getMonth() === 6 && 
+                           now.getDate() === 12;
+
+            // If hackathon hasn't started yet
             if (timeDiff > 0) {
                 const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
                 const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -347,9 +335,10 @@
                 } else if (days === 0) {
                     document.getElementById('nextEvent').textContent = 'Starting Today at 8:00 AM';
                 } else {
-                    document.getElementById('nextEvent').textContent = `Starting in ${days} days at 8:00 AM`;
+                    document.getElementById('nextEvent').textContent = `Starting in ${days} days`;
                 }
                 
+                // Format countdown display
                 if (days > 0) {
                     document.getElementById('countdown').textContent = `${days}d ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
                 } else {
@@ -359,9 +348,9 @@
                 document.getElementById('progressFill').style.width = '0%';
                 return;
             }
-            
-            // Hackathon day logic - if we're on July 12th and after 8:00 AM
-            if (isHackathonDay) {
+
+            // If we're on the hackathon day and it has started
+            if (isToday) {
                 const currentTime = now.getHours() * 60 + now.getMinutes();
                 
                 // Check if it's time to show feedback (18:30 or later)
@@ -370,68 +359,69 @@
                     return;
                 }
                 
+                // Find current and next events
                 let currentEventIndex = -1;
                 let nextEventIndex = -1;
-            
-            // Find current and next events
-            for (let i = 0; i < schedule.length; i++) {
-                const eventStart = parseTime(schedule[i].time);
-                const eventEnd = parseTime(schedule[i].endTime);
-                const eventStartMinutes = eventStart.getHours() * 60 + eventStart.getMinutes();
-                const eventEndMinutes = eventEnd.getHours() * 60 + eventEnd.getMinutes();
                 
-                if (currentTime >= eventStartMinutes && currentTime < eventEndMinutes) {
-                    currentEventIndex = i;
-                    nextEventIndex = i + 1;
-                    break;
-                } else if (currentTime < eventStartMinutes) {
-                    nextEventIndex = i;
-                    break;
-                }
-            }
-            
-            const currentEventEl = document.getElementById('currentEvent');
-            const nextEventEl = document.getElementById('nextEvent');
-            const countdownEl = document.getElementById('countdown');
-            
-            if (currentEventIndex !== -1) {
-                currentEventEl.textContent = `Now: ${schedule[currentEventIndex].event}`;
-                if (nextEventIndex < schedule.length) {
-                    nextEventEl.textContent = `Next: ${schedule[nextEventIndex].event}`;
-                    const nextEventTime = parseTime(schedule[nextEventIndex].time);
-                    const timeDiff = nextEventTime - now;
+                for (let i = 0; i < schedule.length; i++) {
+                    const eventStart = createHackathonDate(schedule[i].time);
+                    const eventEnd = createHackathonDate(schedule[i].endTime);
+                    const eventStartMinutes = eventStart.getHours() * 60 + eventStart.getMinutes();
+                    const eventEndMinutes = eventEnd.getHours() * 60 + eventEnd.getMinutes();
                     
-                    if (timeDiff > 0) {
-                        const hours = Math.floor(timeDiff / (1000 * 60 * 60));
-                        const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
-                        const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+                    if (currentTime >= eventStartMinutes && currentTime < eventEndMinutes) {
+                        currentEventIndex = i;
+                        nextEventIndex = i + 1;
+                        break;
+                    } else if (currentTime < eventStartMinutes) {
+                        nextEventIndex = i;
+                        break;
+                    }
+                }
+                
+                const currentEventEl = document.getElementById('currentEvent');
+                const nextEventEl = document.getElementById('nextEvent');
+                const countdownEl = document.getElementById('countdown');
+                
+                if (currentEventIndex !== -1) {
+                    currentEventEl.textContent = `Now: ${schedule[currentEventIndex].event}`;
+                    if (nextEventIndex < schedule.length) {
+                        nextEventEl.textContent = `Next: ${schedule[nextEventIndex].event}`;
+                        const nextEventTime = createHackathonDate(schedule[nextEventIndex].time);
+                        const timeDiffNext = nextEventTime - now;
+                        
+                        if (timeDiffNext > 0) {
+                            const hours = Math.floor(timeDiffNext / (1000 * 60 * 60));
+                            const minutes = Math.floor((timeDiffNext % (1000 * 60 * 60)) / (1000 * 60));
+                            const seconds = Math.floor((timeDiffNext % (1000 * 60)) / 1000);
+                            countdownEl.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                        }
+                    } else {
+                        nextEventEl.textContent = 'Hackathon Complete!';
+                        countdownEl.textContent = '🎉 DONE! 🎉';
+                    }
+                } else if (nextEventIndex !== -1) {
+                    currentEventEl.textContent = 'Get Ready!';
+                    nextEventEl.textContent = `Next: ${schedule[nextEventIndex].event}`;
+                    const nextEventTime = createHackathonDate(schedule[nextEventIndex].time);
+                    const timeDiffNext = nextEventTime - now;
+                    
+                    if (timeDiffNext > 0) {
+                        const hours = Math.floor(timeDiffNext / (1000 * 60 * 60));
+                        const minutes = Math.floor((timeDiffNext % (1000 * 60 * 60)) / (1000 * 60));
+                        const seconds = Math.floor((timeDiffNext % (1000 * 60)) / 1000);
                         countdownEl.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
                     }
                 } else {
-                    nextEventEl.textContent = 'Hackathon Complete!';
+                    currentEventEl.textContent = 'Hackathon Complete!';
+                    nextEventEl.textContent = 'Thank you for participating!';
                     countdownEl.textContent = '🎉 DONE! 🎉';
                 }
-            } else if (nextEventIndex !== -1) {
-                currentEventEl.textContent = 'Get Ready!';
-                nextEventEl.textContent = `Next: ${schedule[nextEventIndex].event}`;
-                const nextEventTime = parseTime(schedule[nextEventIndex].time);
-                const timeDiff = nextEventTime - now;
                 
-                if (timeDiff > 0) {
-                    const hours = Math.floor(timeDiff / (1000 * 60 * 60));
-                    const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
-                    const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
-                    countdownEl.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-                }
-            } else {
-                currentEventEl.textContent = 'Hackathon Complete!';
-                nextEventEl.textContent = 'Thank you for participating!';
-                countdownEl.textContent = '🎉 DONE! 🎉';
-            }
-            
-                // Update progress bar for hackathon day
-                const totalDuration = parseTime('20:00') - parseTime('08:00');
-                const elapsed = now - parseTime('08:00');
+                // Update progress bar
+                const hackathonEnd = createHackathonDate('20:00');
+                const totalDuration = hackathonEnd - hackathonStart;
+                const elapsed = now - hackathonStart;
                 const progress = Math.max(0, Math.min(100, (elapsed / totalDuration) * 100));
                 document.getElementById('progressFill').style.width = `${progress}%`;
             } else {
@@ -445,11 +435,11 @@
 
         function updateSchedule() {
             const now = new Date();
-            const hackathonStart = new Date(2025, 6, 12, 8, 0, 0);
-            const isHackathonDay = now.getFullYear() === 2025 && 
-                                   now.getMonth() === 6 && 
-                                   now.getDate() === 12;
-            const isAfterHackathonStart = now >= hackathonStart;
+            const isToday = now.getFullYear() === 2025 && 
+                           now.getMonth() === 6 && 
+                           now.getDate() === 12;
+            const hackathonStart = createHackathonDate('08:00');
+            const hasStarted = now >= hackathonStart;
             const currentTime = now.getHours() * 60 + now.getMinutes();
             const container = document.getElementById('scheduleContainer');
             
@@ -457,16 +447,16 @@
             container.innerHTML = '';
             
             // Always show the schedule
-            schedule.forEach((item, index) => {
-                const eventStart = parseTime(item.time);
-                const eventEnd = parseTime(item.endTime);
+            schedule.forEach((item) => {
+                const eventStart = createHackathonDate(item.time);
+                const eventEnd = createHackathonDate(item.endTime);
                 const eventStartMinutes = eventStart.getHours() * 60 + eventStart.getMinutes();
                 const eventEndMinutes = eventEnd.getHours() * 60 + eventEnd.getMinutes();
                 
                 const div = document.createElement('div');
                 div.className = 'schedule-item';
                 
-                if (isHackathonDay && isAfterHackathonStart) {
+                if (isToday && hasStarted) {
                     // On hackathon day after it started
                     if (currentTime >= eventStartMinutes && currentTime < eventEndMinutes) {
                         div.classList.add('current');
