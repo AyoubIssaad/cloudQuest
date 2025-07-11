@@ -323,57 +323,55 @@
 
         function updateCountdown() {
             const now = new Date();
-            const hackathonDate = new Date(2025, 6, 12); // July 12th, 2025
             
-            // Check if it's the hackathon day
+            // Create hackathon start time: July 12th, 2025 at 8:00 AM
+            const hackathonStart = new Date(2025, 6, 12, 8, 0, 0); // July 12th, 8:00 AM
+            const timeDiff = hackathonStart - now;
+            
+            // Check if it's currently July 12th, 2025
             const isHackathonDay = now.getFullYear() === 2025 && 
                                    now.getMonth() === 6 && 
                                    now.getDate() === 12;
             
-            if (!isHackathonDay) {
-                // Show countdown to hackathon start
-                const hackathonStart = new Date(2025, 6, 12, 8, 0, 0); // July 12th, 8:00 AM
-                const timeDiff = hackathonStart - now;
+            // If hackathon hasn't started yet (before July 12th 8:00 AM)
+            if (timeDiff > 0) {
+                const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
                 
-                if (timeDiff > 0) {
-                    const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
-                    const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                    const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
-                    const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
-                    
-                    document.getElementById('currentEvent').textContent = 'EAID Hackathon 2025';
+                document.getElementById('currentEvent').textContent = 'EAID Hackathon 2025';
+                
+                if (days === 1) {
                     document.getElementById('nextEvent').textContent = 'Starting Tomorrow at 8:00 AM';
-                    
-                    if (days > 0) {
-                        document.getElementById('countdown').textContent = `${days}d ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-                    } else {
-                        document.getElementById('countdown').textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-                    }
-                    
-                    // Update progress bar (show 0% before hackathon)
-                    document.getElementById('progressFill').style.width = '0%';
-                    return;
+                } else if (days === 0) {
+                    document.getElementById('nextEvent').textContent = 'Starting Today at 8:00 AM';
                 } else {
-                    // If past start time but not hackathon day, show "Event has ended"
-                    document.getElementById('currentEvent').textContent = 'Event Complete';
-                    document.getElementById('nextEvent').textContent = 'Thank you for participating!';
-                    document.getElementById('countdown').textContent = '🎉 DONE! 🎉';
-                    document.getElementById('progressFill').style.width = '100%';
-                    return;
+                    document.getElementById('nextEvent').textContent = `Starting in ${days} days at 8:00 AM`;
                 }
-            }
-            
-            // Hackathon day logic
-            const currentTime = now.getHours() * 60 + now.getMinutes();
-            
-            // Check if it's time to show feedback (18:30 or later)
-            if (isHackathonDay && currentTime >= 18 * 60 + 30) {
-                showFeedbackSection();
+                
+                if (days > 0) {
+                    document.getElementById('countdown').textContent = `${days}d ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                } else {
+                    document.getElementById('countdown').textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                }
+                
+                document.getElementById('progressFill').style.width = '0%';
                 return;
             }
             
-            let currentEventIndex = -1;
-            let nextEventIndex = -1;
+            // Hackathon day logic - if we're on July 12th and after 8:00 AM
+            if (isHackathonDay) {
+                const currentTime = now.getHours() * 60 + now.getMinutes();
+                
+                // Check if it's time to show feedback (18:30 or later)
+                if (currentTime >= 18 * 60 + 30) {
+                    showFeedbackSection();
+                    return;
+                }
+                
+                let currentEventIndex = -1;
+                let nextEventIndex = -1;
             
             // Find current and next events
             for (let i = 0; i < schedule.length; i++) {
@@ -431,25 +429,34 @@
                 countdownEl.textContent = '🎉 DONE! 🎉';
             }
             
-            // Update progress bar for hackathon day
-            if (isHackathonDay) {
+                // Update progress bar for hackathon day
                 const totalDuration = parseTime('20:00') - parseTime('08:00');
                 const elapsed = now - parseTime('08:00');
                 const progress = Math.max(0, Math.min(100, (elapsed / totalDuration) * 100));
                 document.getElementById('progressFill').style.width = `${progress}%`;
+            } else {
+                // Event has ended
+                document.getElementById('currentEvent').textContent = 'Event Complete';
+                document.getElementById('nextEvent').textContent = 'Thank you for participating!';
+                document.getElementById('countdown').textContent = '🎉 DONE! 🎉';
+                document.getElementById('progressFill').style.width = '100%';
             }
         }
 
         function updateSchedule() {
             const now = new Date();
+            const hackathonStart = new Date(2025, 6, 12, 8, 0, 0);
             const isHackathonDay = now.getFullYear() === 2025 && 
                                    now.getMonth() === 6 && 
                                    now.getDate() === 12;
+            const isAfterHackathonStart = now >= hackathonStart;
             const currentTime = now.getHours() * 60 + now.getMinutes();
             const container = document.getElementById('scheduleContainer');
             
+            // Clear existing content
             container.innerHTML = '';
             
+            // Always show the schedule
             schedule.forEach((item, index) => {
                 const eventStart = parseTime(item.time);
                 const eventEnd = parseTime(item.endTime);
@@ -459,7 +466,8 @@
                 const div = document.createElement('div');
                 div.className = 'schedule-item';
                 
-                if (isHackathonDay) {
+                if (isHackathonDay && isAfterHackathonStart) {
+                    // On hackathon day after it started
                     if (currentTime >= eventStartMinutes && currentTime < eventEndMinutes) {
                         div.classList.add('current');
                     } else if (currentTime >= eventEndMinutes) {
@@ -468,7 +476,7 @@
                         div.classList.add('upcoming');
                     }
                 } else {
-                    // Before hackathon day, all items are upcoming
+                    // Before hackathon starts, all items are upcoming
                     div.classList.add('upcoming');
                 }
                 
