@@ -65,10 +65,8 @@
             font-size: 2.5rem;
             margin-bottom: 10px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-            background: linear-gradient(45deg, #FF9900, #FFAB00);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: white;
+            font-weight: bold;
         }
 
         .header p {
@@ -217,15 +215,15 @@
         }
 
         .qr-code-small {
-            width: 120px;
-            height: 120px;
+            width: 180px;
+            height: 180px;
             background: white;
-            border-radius: 10px;
-            margin: 15px auto;
+            border-radius: 15px;
+            margin: 20px auto;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
         }
 
         .feedback-instruction {
@@ -361,9 +359,9 @@
     <script>
         function generateQRCode() {
             const feedbackUrl = "https://forms.office.com/e/sVGZkXqLV1"; // Replace with actual form URL
-            const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=${encodeURIComponent(feedbackUrl)}`;
+            const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(feedbackUrl)}`;
             
-            return `<img src="${qrApiUrl}" alt="Feedback QR Code" style="width: 100%; height: 100%; border-radius: 10px;">`;
+            return `<img src="${qrApiUrl}" alt="Feedback QR Code" style="width: 100%; height: 100%; border-radius: 15px;">`;
         }
 
         function loadTeamPhoto() {
