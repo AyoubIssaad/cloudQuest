@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EAID Hackathon 2025 - Winners</title>
+    <title>EAID AWS Hackathon - 1st Edition Winners</title>
     <style>
         * {
             margin: 0;
@@ -13,131 +13,229 @@
 
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #232F3E 0%, #131A22 50%, #0F1419 100%);
+            background: #0a0a0a;
             color: white;
             height: 100vh;
             overflow: hidden;
-            display: flex;
-            flex-direction: column;
             position: relative;
         }
 
-        .confetti {
+        .neon-background {
             position: absolute;
-            width: 10px;
-            height: 10px;
-            background: #FF9900;
-            animation: fall linear infinite;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(255, 0, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(0, 255, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 40% 70%, rgba(138, 43, 226, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 70% 80%, rgba(255, 20, 147, 0.1) 0%, transparent 50%);
+            animation: neonPulse 6s ease-in-out infinite;
         }
 
-        .confetti:nth-child(odd) {
-            background: #FFAB00;
-            width: 8px;
-            height: 8px;
-            animation-delay: -2s;
+        @keyframes neonPulse {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
         }
 
-        .confetti:nth-child(even) {
-            animation-delay: -4s;
+        .floating-stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
         }
 
-        @keyframes fall {
-            0% {
-                transform: translateY(-100vh) rotate(0deg);
-                opacity: 1;
+        .star {
+            position: absolute;
+            font-size: 1.5rem;
+            animation: floatStar 8s linear infinite;
+        }
+
+        .star:nth-child(1) { left: 10%; color: #ff00ff; animation-delay: 0s; }
+        .star:nth-child(2) { left: 20%; color: #00ffff; animation-delay: 2s; }
+        .star:nth-child(3) { left: 30%; color: #ff1493; animation-delay: 4s; }
+        .star:nth-child(4) { left: 40%; color: #8a2be2; animation-delay: 1s; }
+        .star:nth-child(5) { left: 50%; color: #ff00ff; animation-delay: 3s; }
+        .star:nth-child(6) { left: 60%; color: #00ffff; animation-delay: 5s; }
+        .star:nth-child(7) { left: 70%; color: #ff1493; animation-delay: 1.5s; }
+        .star:nth-child(8) { left: 80%; color: #8a2be2; animation-delay: 3.5s; }
+        .star:nth-child(9) { left: 90%; color: #00ffff; animation-delay: 0.5s; }
+
+        @keyframes floatStar {
+            0% { 
+                transform: translateY(100vh) rotate(0deg); 
+                opacity: 0; 
             }
-            100% {
-                transform: translateY(100vh) rotate(360deg);
-                opacity: 0;
+            10% { 
+                opacity: 1; 
+            }
+            90% { 
+                opacity: 1; 
+            }
+            100% { 
+                transform: translateY(-100vh) rotate(360deg); 
+                opacity: 0; 
             }
         }
 
         .header {
-            background: rgba(0, 0, 0, 0.5);
-            padding: 20px;
-            text-align: center;
+            background: rgba(0, 0, 0, 0.7);
             backdrop-filter: blur(10px);
-            border-bottom: 3px solid #FF9900;
-            box-shadow: 0 4px 20px rgba(255, 153, 0, 0.3);
+            padding: 25px;
+            text-align: center;
+            border-bottom: 2px solid;
+            border-image: linear-gradient(90deg, #ff00ff, #00ffff, #ff1493) 1;
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.3);
         }
 
         .header h1 {
-            font-size: 2.5rem;
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #ff00ff, #00ffff, #ff1493, #8a2be2);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: neonShift 3s ease-in-out infinite;
+            text-shadow: 
+                0 0 10px rgba(255, 0, 255, 0.5),
+                0 0 20px rgba(0, 255, 255, 0.3),
+                0 0 30px rgba(255, 20, 147, 0.2);
             margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-            color: white;
-            font-weight: bold;
+        }
+
+        @keyframes neonShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
         }
 
         .header p {
-            font-size: 1rem;
-            opacity: 0.9;
-            color: #FFCC80;
+            font-size: 1.2rem;
+            color: #00ffff;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+            font-weight: 400;
         }
 
-        .main-content {
-            flex: 1;
+        .main-container {
             display: grid;
             grid-template-columns: 2fr 1fr;
-            gap: 30px;
+            gap: 40px;
             padding: 40px;
-            align-items: center;
+            height: calc(100vh - 140px);
         }
 
         .winner-section {
-            text-align: center;
-            background: rgba(35, 47, 62, 0.8);
-            border-radius: 30px;
-            padding: 40px;
+            background: rgba(0, 0, 0, 0.6);
             backdrop-filter: blur(15px);
-            border: 3px solid #FF9900;
-            box-shadow: 0 12px 40px rgba(255, 153, 0, 0.4);
+            border-radius: 25px;
+            padding: 40px;
+            border: 2px solid;
+            border-image: linear-gradient(45deg, #ff00ff, #00ffff, #ff1493) 1;
+            box-shadow: 
+                0 0 30px rgba(255, 0, 255, 0.4),
+                0 0 50px rgba(0, 255, 255, 0.2),
+                inset 0 0 20px rgba(255, 0, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
             position: relative;
         }
 
-        .winner-section::before {
-            content: '🏆';
+        .neon-rays {
             position: absolute;
-            top: -25px;
+            top: 50%;
             left: 50%;
-            transform: translateX(-50%);
-            font-size: 3rem;
-            background: rgba(35, 47, 62, 0.9);
-            padding: 10px 20px;
-            border-radius: 50px;
-            border: 2px solid #FF9900;
+            width: 200px;
+            height: 200px;
+            transform: translate(-50%, -50%);
+            background: 
+                linear-gradient(0deg, transparent 40%, rgba(255, 0, 255, 0.1) 50%, transparent 60%),
+                linear-gradient(30deg, transparent 40%, rgba(0, 255, 255, 0.1) 50%, transparent 60%),
+                linear-gradient(60deg, transparent 40%, rgba(255, 20, 147, 0.1) 50%, transparent 60%),
+                linear-gradient(90deg, transparent 40%, rgba(138, 43, 226, 0.1) 50%, transparent 60%);
+            animation: rotateRays 10s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes rotateRays {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        .trophy-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            animation: neonGlow 2s ease-in-out infinite alternate;
+            filter: drop-shadow(0 0 15px #ff00ff) drop-shadow(0 0 25px #00ffff);
+        }
+
+        @keyframes neonGlow {
+            from { 
+                filter: drop-shadow(0 0 15px #ff00ff) drop-shadow(0 0 25px #00ffff);
+                transform: scale(1);
+            }
+            to { 
+                filter: drop-shadow(0 0 25px #ff00ff) drop-shadow(0 0 35px #00ffff) drop-shadow(0 0 45px #ff1493);
+                transform: scale(1.05);
+            }
         }
 
         .winner-title {
-            font-size: 3rem;
-            color: #FF9900;
-            margin-bottom: 20px;
-            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
-            animation: glow 2s ease-in-out infinite alternate;
+            font-size: 4rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, #ff00ff, #00ffff, #ff1493);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 30px;
+            text-shadow: 
+                0 0 20px rgba(255, 0, 255, 0.6),
+                0 0 30px rgba(0, 255, 255, 0.4),
+                0 0 40px rgba(255, 20, 147, 0.3);
+            animation: titlePulse 3s ease-in-out infinite;
         }
 
-        @keyframes glow {
-            from {
-                text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7), 0 0 20px rgba(255, 153, 0, 0.5);
-            }
-            to {
-                text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7), 0 0 30px rgba(255, 153, 0, 0.8);
-            }
+        @keyframes titlePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
         }
 
-        .team-photo-container {
+        .photo-container {
             width: 100%;
             max-width: 500px;
-            margin: 30px auto;
+            margin: 20px 0;
             border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
-            border: 4px solid #FF9900;
-            background: rgba(255, 255, 255, 0.1);
+            border: 3px solid;
+            border-image: linear-gradient(45deg, #ff00ff, #00ffff, #ff1493, #8a2be2) 1;
+            box-shadow: 
+                0 0 25px rgba(255, 0, 255, 0.5),
+                0 0 50px rgba(0, 255, 255, 0.3),
+                0 10px 30px rgba(0, 0, 0, 0.4);
             min-height: 300px;
             display: flex;
             align-items: center;
             justify-content: center;
+            background: rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .photo-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            animation: photoShine 3s ease-in-out infinite;
+        }
+
+        @keyframes photoShine {
+            0% { left: -100%; }
+            50% { left: 100%; }
+            100% { left: 100%; }
         }
 
         .team-photo {
@@ -147,25 +245,31 @@
         }
 
         .photo-placeholder {
-            color: #FFCC80;
-            font-size: 1.2rem;
+            color: #00ffff;
+            font-size: 1.3rem;
             text-align: center;
-            padding: 40px;
-            opacity: 0.7;
+            padding: 50px;
+            font-weight: 500;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
         }
 
         .congratulations {
-            font-size: 1.8rem;
-            color: #FFCC80;
-            margin-top: 20px;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            font-size: 2.2rem;
+            background: linear-gradient(45deg, #ff00ff, #ff1493);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 25px 0 15px 0;
+            font-weight: 700;
+            text-shadow: 0 0 15px rgba(255, 0, 255, 0.4);
         }
 
         .achievement-text {
             font-size: 1.3rem;
-            color: #FFE0B2;
-            margin-top: 15px;
-            line-height: 1.5;
+            color: #00ffff;
+            line-height: 1.6;
+            max-width: 600px;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
         }
 
         .sidebar {
@@ -174,138 +278,125 @@
             gap: 30px;
         }
 
-        .event-complete {
-            background: rgba(35, 47, 62, 0.8);
+        .completion-card {
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(15px);
             border-radius: 20px;
             padding: 30px;
+            border: 2px solid #8a2be2;
+            box-shadow: 
+                0 0 20px rgba(138, 43, 226, 0.4),
+                inset 0 0 15px rgba(138, 43, 226, 0.1);
             text-align: center;
-            backdrop-filter: blur(10px);
-            border: 2px solid rgba(76, 175, 80, 0.6);
-            box-shadow: 0 8px 32px rgba(76, 175, 80, 0.2);
         }
 
-        .event-complete h2 {
-            font-size: 2rem;
-            color: #4CAF50;
+        .completion-title {
+            font-size: 1.8rem;
+            color: #8a2be2;
             margin-bottom: 15px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            font-weight: 600;
+            text-shadow: 0 0 15px rgba(138, 43, 226, 0.5);
         }
 
-        .event-complete p {
+        .completion-text {
             font-size: 1.1rem;
-            color: #A5D6A7;
-            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.5;
         }
 
-        .feedback-section {
-            background: rgba(35, 47, 62, 0.8);
+        .feedback-card {
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(15px);
             border-radius: 20px;
-            padding: 25px;
+            padding: 30px;
+            border: 2px solid #ff1493;
+            box-shadow: 
+                0 0 20px rgba(255, 20, 147, 0.4),
+                inset 0 0 15px rgba(255, 20, 147, 0.1);
             text-align: center;
-            backdrop-filter: blur(10px);
-            border: 2px solid rgba(255, 153, 0, 0.4);
-            box-shadow: 0 8px 32px rgba(255, 153, 0, 0.2);
         }
 
         .feedback-title {
-            font-size: 1.5rem;
-            color: #FF9900;
-            margin-bottom: 15px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            font-size: 1.6rem;
+            color: #ff1493;
+            margin-bottom: 20px;
+            font-weight: 600;
+            text-shadow: 0 0 15px rgba(255, 20, 147, 0.5);
         }
 
-        .qr-code-small {
+        .qr-container {
             width: 180px;
             height: 180px;
-            background: white;
-            border-radius: 15px;
             margin: 20px auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+            border-radius: 15px;
+            background: white;
+            padding: 10px;
+            box-shadow: 
+                0 0 25px rgba(255, 20, 147, 0.6),
+                0 0 40px rgba(0, 255, 255, 0.3);
+            animation: qrGlow 3s ease-in-out infinite;
         }
 
-        .feedback-instruction {
-            font-size: 0.9rem;
-            color: #FFCC80;
-            margin-top: 10px;
+        @keyframes qrGlow {
+            0%, 100% { 
+                box-shadow: 0 0 25px rgba(255, 20, 147, 0.6), 0 0 40px rgba(0, 255, 255, 0.3);
+                transform: scale(1);
+            }
+            50% { 
+                box-shadow: 0 0 35px rgba(255, 20, 147, 0.8), 0 0 50px rgba(0, 255, 255, 0.5);
+                transform: scale(1.02);
+            }
+        }
+
+        .qr-instruction {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: 15px;
             line-height: 1.4;
         }
 
-        .badges {
+        .brand-badges {
             position: absolute;
-            top: 20px;
+            top: 25px;
             width: 100%;
             display: flex;
             justify-content: space-between;
-            padding: 0 20px;
+            padding: 0 40px;
             pointer-events: none;
         }
 
-        .badge {
-            background: rgba(35, 47, 62, 0.9);
-            padding: 10px 20px;
-            border-radius: 20px;
-            font-size: 0.9rem;
+        .brand-badge {
+            background: rgba(0, 0, 0, 0.7);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 153, 0, 0.4);
-        }
-
-        .sparkle {
-            position: absolute;
-            color: #FFD700;
-            font-size: 2rem;
-            animation: sparkle 3s ease-in-out infinite;
-        }
-
-        .sparkle:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
-        .sparkle:nth-child(2) { top: 20%; right: 15%; animation-delay: 1s; }
-        .sparkle:nth-child(3) { bottom: 30%; left: 20%; animation-delay: 2s; }
-        .sparkle:nth-child(4) { bottom: 15%; right: 10%; animation-delay: 0.5s; }
-
-        @keyframes sparkle {
-            0%, 100% { 
-                opacity: 0;
-                transform: scale(0.5);
-            }
-            50% { 
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        .footer-message {
-            text-align: center;
-            padding: 20px;
-            background: rgba(0, 0, 0, 0.3);
-            font-size: 1.1rem;
-            color: #FFCC80;
-            border-top: 1px solid rgba(255, 153, 0, 0.3);
+            padding: 12px 20px;
+            border-radius: 20px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            border: 1px solid #00ffff;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+            color: #00ffff;
         }
     </style>
 </head>
 <body>
-    <!-- Confetti Animation -->
-    <div class="confetti" style="left: 10%; animation-duration: 3s;"></div>
-    <div class="confetti" style="left: 20%; animation-duration: 2.5s;"></div>
-    <div class="confetti" style="left: 30%; animation-duration: 3.5s;"></div>
-    <div class="confetti" style="left: 40%; animation-duration: 2s;"></div>
-    <div class="confetti" style="left: 50%; animation-duration: 4s;"></div>
-    <div class="confetti" style="left: 60%; animation-duration: 3s;"></div>
-    <div class="confetti" style="left: 70%; animation-duration: 2.5s;"></div>
-    <div class="confetti" style="left: 80%; animation-duration: 3.5s;"></div>
-    <div class="confetti" style="left: 90%; animation-duration: 2s;"></div>
+    <div class="neon-background"></div>
 
-    <!-- Sparkles -->
-    <div class="sparkle">✨</div>
-    <div class="sparkle">⭐</div>
-    <div class="sparkle">✨</div>
-    <div class="sparkle">⭐</div>
+    <!-- Floating neon stars -->
+    <div class="floating-stars">
+        <div class="star">★</div>
+        <div class="star">✦</div>
+        <div class="star">★</div>
+        <div class="star">✧</div>
+        <div class="star">★</div>
+        <div class="star">✦</div>
+        <div class="star">★</div>
+        <div class="star">✧</div>
+        <div class="star">★</div>
+    </div>
 
-    <div class="badges">
-        <div class="badge">🏢 Deloitte EAID</div>
-        <div class="badge">☁️ AWS Solutions</div>
+    <div class="brand-badges">
+        <div class="brand-badge">🏢 Deloitte EAID</div>
+        <div class="brand-badge">☁️ AWS Solutions</div>
     </div>
     
     <div class="header">
@@ -313,19 +404,23 @@
         <p>Building AI Solutions with AWS Services for DES EAID Practice | July 12th, 2025</p>
     </div>
 
-    <div class="main-content">
+    <div class="main-container">
         <div class="winner-section">
-            <div class="winner-title">🏆 WINNERS! 🏆</div>
+            <div class="neon-rays"></div>
             
-            <div class="team-photo-container" id="teamPhotoContainer">
+            <div class="trophy-icon">🏆</div>
+            
+            <div class="winner-title">WINNERS</div>
+            
+            <div class="photo-container" id="teamPhotoContainer">
                 <div class="photo-placeholder">
-                    Team photo will appear here<br>
+                    🏆 Winning Team Photo 🏆<br>
                     (winner.jpg)
                 </div>
             </div>
             
             <div class="congratulations">
-                Congratulations to our Champions!
+                Congratulations Champions!
             </div>
             
             <div class="achievement-text">
@@ -335,59 +430,50 @@
         </div>
 
         <div class="sidebar">
-            <div class="event-complete">
-                <h2>🎉 Event Complete</h2>
-                <p>
+            <div class="completion-card">
+                <div class="completion-title">🎉 Event Complete</div>
+                <div class="completion-text">
                     Thank you to all participants for an incredible day of innovation, collaboration, and breakthrough AI solutions!
-                </p>
+                </div>
             </div>
 
-            <div class="feedback-section">
+            <div class="feedback-card">
                 <div class="feedback-title">Share Your Experience</div>
-                <div class="qr-code-small" id="qrCodeSmall"></div>
-                <div class="feedback-instruction">
-                    Scan to provide feedback<br>and help us improve future hackathons
+                <div class="qr-container" id="qrCodeContainer"></div>
+                <div class="qr-instruction">
+                    Scan to provide feedback<br>
+                    and help us improve future hackathons
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="footer-message">
-        🚀 Innovation • 🤝 Collaboration • 🏆 Excellence • Thank you for participating in EAID Hackathon 2025!
-    </div>
-
     <script>
         function generateQRCode() {
-            const feedbackUrl = "https://forms.office.com/e/sVGZkXqLV1"; // Replace with actual form URL
-            const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(feedbackUrl)}`;
+            const feedbackUrl = "https://forms.office.com/e/sVGZkXqLV1";
+            const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=${encodeURIComponent(feedbackUrl)}`;
             
-            return `<img src="${qrApiUrl}" alt="Feedback QR Code" style="width: 100%; height: 100%; border-radius: 15px;">`;
+            return `<img src="${qrApiUrl}" alt="Feedback QR Code" style="width: 100%; height: 100%; border-radius: 5px;">`;
         }
 
         function loadTeamPhoto() {
             const container = document.getElementById('teamPhotoContainer');
             
-            // Try to load the winner.jpg image
             const img = new Image();
             img.onload = function() {
                 container.innerHTML = `<img src="winner.jpg" alt="Winning Team" class="team-photo">`;
             };
             img.onerror = function() {
-                // Keep placeholder if image doesn't exist
-                container.innerHTML = `<div class="photo-placeholder">Team photo will appear here<br>(winner.jpg)</div>`;
+                container.innerHTML = `<div class="photo-placeholder">🏆 Winning Team Photo 🏆<br>(winner.jpg)</div>`;
             };
             img.src = 'winner.jpg';
         }
 
         function init() {
-            // Load QR code
-            document.getElementById('qrCodeSmall').innerHTML = generateQRCode();
-            
-            // Try to load team photo
+            document.getElementById('qrCodeContainer').innerHTML = generateQRCode();
             loadTeamPhoto();
         }
 
-        // Start the page
         init();
     </script>
 </body>
