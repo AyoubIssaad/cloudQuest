@@ -401,7 +401,7 @@
     
     <div class="header">
         <h1>EAID AWS Hackathon - 1st Edition</h1>
-        <p>Building AI Solutions with AWS Services for DES EAID Practice | July 12th, 2025.</p>
+        <p>Building AI Solutions with AWS Services for DES EAID Practice | July 12th, 2025</p>
     </div>
 
     <div class="main-container">
@@ -459,14 +459,42 @@
         function loadTeamPhoto() {
             const container = document.getElementById('teamPhotoContainer');
             
+            // First, try to load the image with error handling
             const img = new Image();
+            
             img.onload = function() {
+                console.log('Image loaded successfully');
                 container.innerHTML = `<img src="winner.jpg" alt="Winning Team" class="team-photo">`;
             };
+            
             img.onerror = function() {
-                container.innerHTML = `<div class="photo-placeholder">🏆 Winning Team Photo 🏆<br>(winner.jpg)</div>`;
+                console.log('Image failed to load - checking possible issues:');
+                console.log('1. Make sure winner.jpg is in the same folder as this HTML file');
+                console.log('2. Check the filename is exactly "winner.jpg" (case sensitive)');
+                console.log('3. Verify the image file is not corrupted');
+                
+                // Keep placeholder with helpful message
+                container.innerHTML = `
+                    <div class="photo-placeholder">
+                        🏆 Winning Team Photo 🏆<br>
+                        <small style="font-size: 0.9rem; opacity: 0.7;">
+                            Image not found: winner.jpg<br>
+                            Check console for details
+                        </small>
+                    </div>`;
             };
+            
+            // Try loading the image
+            console.log('Attempting to load winner.jpg...');
             img.src = 'winner.jpg';
+            
+            // Also try alternative paths
+            setTimeout(() => {
+                if (!img.complete || img.naturalHeight === 0) {
+                    console.log('Trying alternative path: ./winner.jpg');
+                    img.src = './winner.jpg';
+                }
+            }, 1000);
         }
 
         function init() {
